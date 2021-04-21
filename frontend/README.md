@@ -2,6 +2,8 @@
 
 ## Build the container
 
+**NOTE** docker-compose is not set up yet - you _must_ run this from the /frontend
+**Gotchya** please notice the "." at the end of the line - this is intentional and should not be excluded!
 docker build -t apollomusic-frontend -f Dockerfile.dev .
 
 ### Check it is built
