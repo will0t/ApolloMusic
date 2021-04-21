@@ -3,28 +3,33 @@
 ## Build the container
 
 **NOTE** docker-compose is not set up yet - you _must_ run this from the /frontend
+
 **Gotchya** please notice the "." at the end of the line - this is intentional and should not be excluded!
-docker build -t apollomusic-frontend -f Dockerfile.dev .
+
+`docker build -t apollomusic-frontend -f Dockerfile.dev .`
 
 ### Check it is built
 
-docker ps
+`docker ps`
 
 ## Run the container
 
 **Run as volume - allows changes to go from local files to container during development**
-docker run -p 8080:3000 -v /app/node_modules -v "$(pwd):/app" levimk/apollomusic-frontend
 
-_General_: docker run -p xxxx:yyyy -v /app/node\*modules -v $(pwd):/app <image-id>
+`docker run -p 8080:3000 -v /app/node_modules -v "$(pwd):/app" levimk/apollomusic-frontend`
+
+_General_: `docker run -p xxxx:yyyy -v /app/node\*modules -v $(pwd):/app <image-id>`
+
 _What is this command doing?_
 
-- run => run an image as a container
-- -p xxxx:yyy => map a port on the local machine to a (virtual) port on the container
-- -v $(pwd):/app => map the local working directory to the /app directory in the container
-- -v /app/node\*modules => do **not** map the node_modules folder in the container to any folder outside the container
+- `run` => run an image as a container
+- `-p xxxx:yyy` => map a port on the local machine to a (virtual) port on the container
+- `-v $(pwd):/app` => map the local working directory to the /app directory in the container
+- `-v /app/node_modules` => do **not** map the node_modules folder in the container to any folder outside the container
 
 **Alternative: run not as volume (not recommended as changes to local will need a rebuild)**
-docker run -d --name apollomusic-frontend -p 8080:3000 levimk/apollomusic-frontend
+
+`docker run -d --name apollomusic-frontend -p 8080:3000 levimk/apollomusic-frontend`
 
 # Getting Started with Create React App
 
