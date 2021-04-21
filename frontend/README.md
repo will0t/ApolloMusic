@@ -16,7 +16,7 @@
 
 **Run as volume - allows changes to go from local files to container during development**
 
-`docker run -p 8080:3000 -v /app/node_modules -v "$(pwd):/app" levimk/apollomusic-frontend`
+`docker run -p 8080:3000 -v /app/node_modules -v "$(pwd):/app" apollomusic-frontend`
 
 _General_: `docker run -p xxxx:yyyy -v /app/node\*modules -v $(pwd):/app <image-id>`
 
