@@ -29,7 +29,7 @@ _What is this command doing?_
 
 **Alternative: run not as volume (not recommended as changes to local will need a rebuild)**
 
-`docker run -d --name apollomusic-frontend -p 8080:3000 levimk/apollomusic-frontend`
+`docker run -d --name apollomusic-frontend -p 8080:3000 apollomusic-frontend`
 
 # Getting Started with Create React App
 
