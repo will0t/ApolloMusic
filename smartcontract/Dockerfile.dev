@@ -19,26 +19,31 @@
 
 # CMD ["ganache-cli"]
 
-FROM mhart/alpine-node:14 as builder
+# Original author: github/gjeanmart
+# Source: https://github.com/gjeanmart/truffle-docker
 
-RUN apk add --no-cache make gcc g++ python git bash
-COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
-WORKDIR /app
-RUN git config --global url.https://github.com/.insteadOf ssh://git@github.com/
-RUN npm ci
-COPY . .
-RUN npx webpack-cli --config ./webpack/webpack.docker.config.js
+### --- BASE IMAGE --- ###
+FROM node:lts-alpine
 
-FROM mhart/alpine-node:14 as runtime
+### --- ENVIRONMENT --- ###
+ENV VERSION "0.1"
+ENV COMMAND "migrate"
+ENV API_HOST "0.0.0.0"
+ENV API_PORT "8888"
+ENV NETWORK "development"
+ENV SRC_DIR "/app"
+# ENV GIT_BRANCH "master"
+# ENV GIT_FOLDER "/"
+ENV TRUFFLE_VERSION "5.3.3"
 
-WORKDIR /app
+### --- SETUP --- ###
+RUN npm install -g truffle@$TRUFFLE_VERSION && npm config set bin-links false
 
-COPY --from=builder "/app/build/ganache-core.docker.cli.js" "./ganache-core.docker.cli.js"
-COPY --from=builder "/app/build/ganache-core.docker.cli.js.map" "./ganache-core.docker.cli.js.map"
+RUN mkdir -p $SRC_DIR
 
-ENV DOCKER true
+EXPOSE $API_PORT
+WORKDIR $SRC_DIR
 
-EXPOSE 8545
-
-ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]
+RUN npm install -g truffle
+RUN npm install
+RUN ./scripts/api.js
