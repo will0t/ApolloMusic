@@ -45,5 +45,4 @@ EXPOSE $API_PORT
 WORKDIR $SRC_DIR
 
 RUN npm install -g truffle
-RUN npm install
-RUN ./scripts/api.js
+CMD ["npm", "run", "./scripts"]
