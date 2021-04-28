@@ -1,0 +1,2 @@
+# Do not push Ganache data to Git
+/ganache_data

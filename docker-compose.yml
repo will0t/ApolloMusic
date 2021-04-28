@@ -7,7 +7,7 @@ services:
     ports:
       - '8545:8545'
     volumes:
-      - ./ganache_data:/ganache_data
+      - ./devrpc/ganache_data:/ganache_data
   frontend:
     build:
       dockerfile: Dockerfile.dev
