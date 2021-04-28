@@ -17,3 +17,14 @@ services:
     volumes:
       - /app/node_modules
       - ./frontend:/app
+  truffle:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./smartcontract
+    ports:
+      - '9545:9545'
+    stdin_open: true
+    tty: true
+    volumes:
+      - /app/node_modules
+      - ./smartcontract:/app
