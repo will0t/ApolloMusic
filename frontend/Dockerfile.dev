@@ -11,7 +11,7 @@ FROM node:lts-alpine
 # instruction.
 WORKDIR '/app'
 
-# Copy everything from our current file into the WORKDIR in the container
+# Copy package.json and package-lock.json into the WORKDIR in the container
 # COPY <source> <destination-folder>
 # if destination-folder == "./" then it is WORKDIR implicitly
 # copy both package.json and package-lock.json

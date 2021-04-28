@@ -1,26 +1,3 @@
-# # Install our base image
-# # lts = long-term support, i.e. the latest stable version of Node
-# #       specifically, Node's LTS version is currently 14.16.1 (April 2021)
-# # alpine = Alpine Linux, the minimal Linux image: https://hub.docker.com/_/alpine
-# FROM node:lts-alpine
-
-# # The WORKDIR instruction sets the working directory for any
-# # RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow
-# # it in the Dockerfile. If the WORKDIR doesn’t exist, it will
-# # be created even if it’s not used in any subsequent Dockerfile
-# # instruction.
-# WORKDIR '/app'
-
-# RUN npm install -g --save ganache-cli
-
-# EXPOSE 8545
-
-# # ENTRYPOINT [ "testrpc" ]
-
-# CMD ["ganache-cli"]
-
-# Original author: github/gjeanmart
-# Source: https://github.com/gjeanmart/truffle-docker
 
 ### --- BASE IMAGE --- ###
 FROM node:lts-alpine
@@ -40,9 +17,14 @@ ENV TRUFFLE_VERSION "5.3.3"
 RUN npm install -g truffle@$TRUFFLE_VERSION && npm config set bin-links false
 
 RUN mkdir -p $SRC_DIR
+WORKDIR $SRC_DIR
+
+COPY contracts ./contracts
+COPY migrations ./migrations
+COPY test ./test
+COPY truffle-config.js ./truffle-config.js
 
 EXPOSE $API_PORT
-WORKDIR $SRC_DIR
 
 RUN npm install -g truffle
 CMD ["npm", "run", "./scripts"]
