@@ -1,37 +1,40 @@
-# Docker setup
+# 1. Docker
 
-## Build the container
+## Option 1: only start React with the dev server
 
-**NOTE** docker-compose is not set up yet - you _must_ run this from the /frontend
+### Option 1, Step 1: start the container
 
-**Gotchya** please notice the "." at the end of the line - this is intentional and should not be excluded!
+From the project root directory, run:
 
-`docker build -t apollomusic-frontend -f Dockerfile.dev .`
+`docker-compose run -p 8080:3000 frontend [--build]`
 
-### Check it is built
+**IMPORTANT**: remember to include the `-p`/`--publish` flag to make sure that the host port `8080` is mapped to the container port `3000`.
 
-`docker ps`
+### Option 1, Step 2: get inside the container
 
-## Run the container
+1. **List the running containers**: `docker ps`
+2. _Copy_ the `NAME` or the `CONTAINER ID`
+3. `docker exec -it [NAME | CONTAINER ID] sh`
 
-**Run as volume - allows changes to go from local files to container during development**
+## Option 2: start the full stack
 
-`docker run -p 8080:3000 -v /app/node_modules -v "$(pwd):/app" apollomusic-frontend`
+**Warning**: the below command needs to be executed from the project root folder (above), which contains `docker-compose.yml`. The below commands will not work if you run them from this directory.
 
-_General_: `docker run -p xxxx:yyyy -v /app/node\*modules -v $(pwd):/app <image-id>`
+### Option 2, Step 1: build and run all the services together
 
-_What is this command doing?_
+`docker-compose build`
 
-- `run` => run an image as a container
-- `-p xxxx:yyy` => map a port on the local machine to a (virtual) port on the container
-- `-v $(pwd):/app` => map the local working directory to the /app directory in the container
-- `-v /app/node_modules` => do **not** map the node_modules folder in the container to any folder outside the container
+**NOTE**: building is optional but rebuilding is recommended after installing new dependencies.
 
-**Alternative: run not as volume (not recommended as changes to local will need a rebuild)**
+`docker-compose up [--build]`
 
-`docker run -d --name apollomusic-frontend -p 8080:3000 apollomusic-frontend`
+### Option 2, Step 2: get inside the running container
 
-# Getting Started with Create React App
+1. **List the running containers**: `docker ps`
+2. _Copy_ the `NAME` or the `CONTAINER ID`
+3. `docker exec -it [NAME | CONTAINER ID] sh`
+
+# 2. React: Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
