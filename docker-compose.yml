@@ -6,6 +6,8 @@ services:
       context: ./backend
     ports:
       - '8000:8000'
+    stdin_open: true
+    tty: true
     volumes:
       - ./backend/app:/app
     command: >
@@ -16,6 +18,8 @@ services:
       context: ./frontend
     ports:
       - '8080:3000'
+    stdin_open: true
+    tty: true
     volumes:
       - /app/node_modules
       - ./frontend:/app
