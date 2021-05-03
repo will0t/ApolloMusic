@@ -30,6 +30,8 @@ services:
     volumes:
       - /app/node_modules
       - ./smartcontract:/app
+    depends_on:
+      - devrpc
   devrpc:
     build:
       dockerfile: Dockerfile.dev
