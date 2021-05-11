@@ -1,5 +1,32 @@
-import logo from './logo.svg';
+// React Imports
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Component Imports
+import NavBar from './components/navbar.js';
+
+// Views Imports 
+import Homepage from './components/homepage.js';
+
+// CSS
 import './App.css';
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div className = "header">
+          <NavBar/>
+        </div>
+        <div className = "container">
+          <Switch>
+            <Route path = "/" exact component = {Homepage}/>
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
+}
 
 function App() {
   return (
@@ -21,6 +48,8 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;
 
