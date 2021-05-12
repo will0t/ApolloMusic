@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Homepage extends React.Component{
+class Metamask extends React.Component {
     render() {
         return(
             <div>
                 <p>
-                    This is your Homepage. APOLLO.
+                    Metamask Wallet integrated successfully. 
                 </p>
                 <div>
-                    <Link to = "/metamask">Integrate Metamask Wallet Here.</Link>
+                    <Link to = "/create">Create a Smart Contract Here.</Link>
                 </div>
             </div>
         )
     }
 }
 
-export default Homepage;
+export default Metamask;

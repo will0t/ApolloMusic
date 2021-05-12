@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+.navbarList {
+    list-style-type: none;
+    background-color: blueviolet;
+    margin: 0;
+    padding: 0;
+    padding-left: 3px;
+}
+
+.navbarList li {
+    font-family: 'Raleway', cursive;
+    display: inline-block;
+    text-align: right;
+    height: 10vh;
+}
+
+.navbarLogo {
+    height: 6vh;
+    padding: 10px;
+    display: inline-block;
+    text-align: right;
+}
+
+.navbarLink {
+    line-height: 10vh;
+    height: 10vh;
+    font-size: 3vh;
+    color: chartreuse;
+    padding: 0 18px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.navbarLink:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display: block;
+    text-align: center;
+    font-weight: 100;
+    padding: 0px 25px;
+    transition: 0.3s ease;
+    background-color: chartreuse;
+    text-decoration: none;
+}
+
