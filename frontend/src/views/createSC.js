@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, DatePicker, Upload, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Form, Input, Button, DatePicker, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 import 'antd/dist/antd.css';
 
@@ -17,6 +17,11 @@ class CreateSC extends React.Component {
 
         const onFinish = (values) => {
             console.log('Success:', values);
+
+            //date format
+            const time = moment(values.startDate).format('YYYY-MM-DD')
+            console.log(time)
+            values.startDate = time
 
             this.props.history.push('/confirm', { values })
         };
@@ -56,7 +61,7 @@ class CreateSC extends React.Component {
 
 
 
-                        <Form.Item label="Start date">
+                        <Form.Item label="Start date" name="startDate">
                             <DatePicker />
 
                         </Form.Item>
