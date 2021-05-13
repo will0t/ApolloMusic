@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import { Form, Input, Button, DatePicker, Upload } from 'antd';
+import { Form, Input, Button, DatePicker, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-
+import { InboxOutlined } from '@ant-design/icons';
 
 import 'antd/dist/antd.css';
 
@@ -15,8 +13,12 @@ class CreateSC extends React.Component {
 
     render() {
 
+        const { Dragger } = Upload;
+
         const onFinish = (values) => {
             console.log('Success:', values);
+
+            this.props.history.push('/confirm', { values })
         };
 
         const onFinishFailed = (errorInfo) => {
@@ -24,7 +26,7 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div style={{ 'padding-left': '20px' }}>
+            <div style={{ 'paddingLeft': '50px','paddingTop':'20px' }}>
 
                 <h1>Create Contract</h1>
 
@@ -66,17 +68,21 @@ class CreateSC extends React.Component {
                         >
                             <Input suffix="minutes" />
                         </Form.Item>
+
                         <Form.Item
                             label="Terms & Condition"
                             name="term"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
                             <div>
-                                <Upload>
-                                    <Button icon={<UploadOutlined />}>Add Contract File</Button>
-                                </Upload>
+                                <Dragger maxCount={1}>
+                                    <p className="ant-upload-drag-icon">
+                                        <InboxOutlined />
+                                    </p>
+                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                </Dragger>
                             </div>
                         </Form.Item>
+
 
                     </div>
                     <div className='half_div'>
@@ -101,23 +107,27 @@ class CreateSC extends React.Component {
 
                         >
                             <div>
-                                <Upload>
-                                    <Button icon={<UploadOutlined />}>Upload</Button>
-                                </Upload>
+                                <Dragger maxCount={1}>
+                                    <p className="ant-upload-drag-icon">
+                                        <InboxOutlined />
+                                    </p>
+                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                </Dragger>
                             </div>
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
-                                <Link to="/confirm">Submit</Link>
+                            <Button type="primary" size='large' htmlType="submit">
+                                Submit
                             </Button>
                         </Form.Item>
+
                     </div>
 
 
                 </Form>
 
-            </div>
+            </div >
         )
     }
 }
