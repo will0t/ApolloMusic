@@ -1,7 +1,7 @@
-const Demo = artifacts.require("Demo");
+const ApolloAgreement = artifacts.require("ApolloAgreement");
 
-const DEFAULT_NAME = "demo | " + Date(Date.now()).toString();
+const DEFAULT_NAME = "AA | " + Date(Date.now()).toString();
 
 module.exports = function(deployer) {
-  deployer.deploy(Demo, DEFAULT_NAME);
+  deployer.deploy(ApolloAgreement, DEFAULT_NAME);
 };
