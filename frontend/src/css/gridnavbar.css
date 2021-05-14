@@ -1,25 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-.navbar{
-    height: 60px;
-}
-
-.navbarList {
-    list-style-type: none;
-    background-color: #330945;
-    margin: 0;
-    padding: 0;
-    padding-left: 3px;
-}
-
-.navbarList li {
-    font-family: 'Raleway', cursive;
-    display: inline-block;
-    text-align: right;
+.navbarholder{
     height: 50px;
+    background-color: #330945;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 6fr;
+    grid-column-gap: 5px;
 }
 
-.navbarLogo {
+.gridnavbarLogo {
     height: 50px;
     padding: 8px 10px 8px;
     display: inline-block;
@@ -27,24 +16,24 @@
 }
 
 
-.navbarLink {
+.gridnavbarLink {
     height: inherit;
     font-size: 24px;
     color: #79FFB1;
-    padding: 5px 18px;
+    padding: 5px 5px;
     text-decoration: none;
     display: block;
     transition: 0.3s ease;
     text-align: center;
 }
 
-.navbarLink:hover {
+.gridnavbarLink:hover {
     text-decoration: none;
     color: #79FFB1;
     display: block;
     text-align: center;
-    font-weight: 100;
-    
+    font-size: 24px;
+    text-align: center;
     transition: 0.3s ease;
     background-color: #A4A9F5;
     text-decoration: none;

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Component Imports
 import NavBar from './components/navbar.js';
+import GridNavBar from './components/gridnavbar.js';
 
 // Views Imports 
 import Homepage from './views/homepage.js';
@@ -19,7 +20,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className = "header">
-          <NavBar/>
+          <GridNavBar/>
         </div>
         <div className = "container">
           <Switch>
