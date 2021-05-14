@@ -4,7 +4,7 @@
     height: 50px;
     background-color: #330945;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 6fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr 6fr;
     grid-column-gap: 5px;
 }
 
@@ -37,5 +37,14 @@
     transition: 0.3s ease;
     background-color: #A4A9F5;
     text-decoration: none;
+}
+
+.searchBar{
+    height: 40px;
+    width: 300px;
+    display: block;
+    background:"#F2F1F9";
+    padding: 8px 10px 8px;
+    margin-top: 5px;
 }
 

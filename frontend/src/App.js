@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/navbar.js';
 import GridNavBar from './components/gridnavbar.js';
 
+
 // Views Imports 
 import Homepage from './views/homepage.js';
 import Metamask from './views/metamask.js';
