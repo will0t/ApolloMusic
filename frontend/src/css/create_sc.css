@@ -1,13 +1,23 @@
 .createSC_div{
-    background-color: black;
+    padding-left: 50px;
+    padding-top: 20px;
 }
 
 .half_div{
+    background-color: #A4A9F5;
+    color: #79FFB1;
     width:50%;
+    height: 600px;
     float:left;
+    padding-left: 30px;
+    padding-top: 20px;
 }
 
 label{
     color:rgba(0, 0, 205, 0.733);
     font-weight: 500;
+}
+
+Form{
+    Fontcolor: #79FFB1;
 }

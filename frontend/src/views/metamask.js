@@ -1,15 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// Ant Design CSS
+import 'antd/dist/antd.css';
+import { Button } from 'antd';
 
 class Metamask extends React.Component {
     render() {
         return(
             <div>
-                <p>
-                    Metamask Wallet integrated successfully. 
-                </p>
+                <h1>
+                    Metamask Wallet integrated successfully.
+                </h1>
                 <div>
-                    <Link to = "/create">Create a Smart Contract Here.</Link>
+                    <Button type="primary" size='large' href="/create">
+                    Create Smart Contract
+                    </Button>
                 </div>
             </div>
         )

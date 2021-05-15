@@ -7,14 +7,14 @@ import NavBar from './components/navbar.js';
 import GridNavBar from './components/gridnavbar.js';
 
 
-// Views Imports 
+// Views Imports
 import Homepage from './views/homepage.js';
 import Metamask from './views/metamask.js';
 import CreateSC from './views/createSC.js';
 import ConfirmSC from './views/confirmSC.js';
 
 // CSS
-import './App.css';
+import './css/general.css';
 
 class App extends React.Component {
   render() {
@@ -23,7 +23,7 @@ class App extends React.Component {
         <div className = "header">
           <GridNavBar/>
         </div>
-        <div className = "container">
+        <div className = "content-wrapper">
           <Switch>
             <Route path = "/" exact component = {Homepage}/>
             <Route path = "/metamask" exact component = {Metamask}/>
@@ -58,4 +58,3 @@ class App extends React.Component {
 // }
 
 export default App;
-

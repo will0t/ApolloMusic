@@ -31,7 +31,7 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div style={{ 'paddingLeft': '50px','paddingTop':'20px' }}>
+            <div className="creatSC_div">
 
                 <h1>Create Contract</h1>
 
@@ -128,8 +128,6 @@ class CreateSC extends React.Component {
                         </Form.Item>
 
                     </div>
-
-
                 </Form>
 
             </div >
@@ -138,5 +136,3 @@ class CreateSC extends React.Component {
 }
 
 export default CreateSC;
-
-
