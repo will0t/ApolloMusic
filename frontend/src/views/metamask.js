@@ -3,6 +3,9 @@ import Web3 from 'web3';
 import '../App.css';
 import Apollo from '../contracts/ApolloAgreement.json';
 import { Input } from 'reactstrap';
+// Ant Design CSS
+import 'antd/dist/antd.css';
+import { Button } from 'antd';
 
 class Metamask extends React.Component {
 
@@ -180,6 +183,7 @@ class Metamask extends React.Component {
                     </button>
                     <h1> Agreements </h1>
                     {agreements}
+
                 </div>
             </div>
         )
