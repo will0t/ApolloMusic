@@ -1,15 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// Ant Design CSS
+import 'antd/dist/antd.css';
+import { Button } from 'antd';
 
 class Homepage extends React.Component{
     render() {
         return(
             <div>
-                <p>
-                    This is your Homepage. APOLLO.
-                </p>
+                <h1>
+                    Homepage
+                </h1>
                 <div>
-                    <Link to = "/metamask">Integrate Metamask Wallet Here.</Link>
+                    <Button type="primary" size='large' href="/metamask">
+                    Setup MetaMask
+                    </Button>
                 </div>
             </div>
         )

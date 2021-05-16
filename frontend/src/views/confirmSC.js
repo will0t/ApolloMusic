@@ -19,7 +19,7 @@ class ConfirmSC extends React.Component {
         //dragger component
         const { Dragger } = Upload;
 
-        //form-term：dragger 
+        //form-term：dragger
         const termProps = {
             defaultFileList: [
                 {
@@ -31,7 +31,7 @@ class ConfirmSC extends React.Component {
             ],
         };
 
-        //form-attachment：dragger 
+        //form-attachment：dragger
         const attachProps = {
             defaultFileList: [
                 {
@@ -63,6 +63,8 @@ class ConfirmSC extends React.Component {
                 <div className="title-div">
                     apollo <img src={apollo} style={{ 'width': '50px', 'height': '50px' }} alt="logo" height="32" />
                 </div>
+                <h1> Confirm Smart Contract Details
+                </h1>
 
                 {/* form start */}
                 <Form
