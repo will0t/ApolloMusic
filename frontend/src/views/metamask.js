@@ -114,9 +114,9 @@ class Metamask extends React.Component {
         var connectMetamaskButton = ""
         if (this.state.account === "") {
             connectMetamaskButton = 
-            <button onClick = {this.connectMetamask}>
+            <Button onClick = {this.connectMetamask}>
                 Connect Metamask
-            </button>
+            </Button>
         }
 
         // CHANGE: only shows the first address for now
@@ -125,7 +125,7 @@ class Metamask extends React.Component {
             console.log(this.state.result)
             agreements = (
                 this.state.result.map((agreement, key) => (
-                    <div>
+                    <div className = "content-wrapper">
                         Agreement Number: {key+1}
                         <br/>
                         Amount: {agreement.payoutAmount}
@@ -139,7 +139,7 @@ class Metamask extends React.Component {
         }
 
         return (
-            <div>
+            <div className = "content-wrapper">
                 <h1>Welcome to Apollo</h1>
                 <h2>Account Connected: {this.state.account}</h2>
                 {connectMetamaskButton}
@@ -170,18 +170,18 @@ class Metamask extends React.Component {
                         onChange = {this.handleInput}
                     />
                     <br/>
-                    <button onClick = {this.createContract}>
+                    <Button onClick = {this.createContract}>
                         Submit Contract
-                    </button>
+                    </Button>
                 </div>
                 <br/>
                 <br/>
                 <br/>
                 <div>
-                    <button onClick = {this.getAgreementsByPromoter}>
-                        Retrieve Agreements    
-                    </button>
                     <h1> Agreements </h1>
+                    <Button onClick = {this.getAgreementsByPromoter}>
+                        Retrieve Agreements    
+                    </Button>
                     {agreements}
 
                 </div>
