@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Component Imports
-import NavBar from './components/navbar.js';
 import GridNavBar from './components/gridnavbar.js';
 
 
@@ -12,6 +11,7 @@ import Homepage from './views/homepage.js';
 import Metamask from './views/metamask.js';
 import CreateSC from './views/createSC.js';
 import ConfirmSC from './views/confirmSC.js';
+import FinishedSC from './views/finishedSC.js';
 
 // CSS
 import './css/general.css';
@@ -29,6 +29,7 @@ class App extends React.Component {
             <Route path = "/metamask" exact component = {Metamask}/>
             <Route path = "/create" exact component = {CreateSC}/>
             <Route path = "/confirm" exact component = {ConfirmSC}/>
+            <Route path = "/success" exact component = {FinishedSC}/>
           </Switch>
         </div>
       </Router>

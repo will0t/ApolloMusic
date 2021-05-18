@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, DatePicker, Upload } from 'antd';
+import { Form, Input, Button, DatePicker, Upload, InputNumber} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -19,9 +19,13 @@ class CreateSC extends React.Component {
             console.log('Success:', values);
 
             //date format
-            const time = moment(values.startDate).format('YYYY-MM-DD')
-            console.log(time)
-            values.startDate = time
+            const startTime = moment(values.startDate).format('YYYY-MM-DD')
+            console.log(startTime)
+            values.startDate = startTime
+
+            const payoutTime = moment(values.payoutTime).format('YYYY-MM-DD')
+            console.log(payoutTime)
+            values.payoutTime = payoutTime
 
             this.props.history.push('/confirm', { values })
         };
@@ -31,7 +35,7 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div className="creatSC_div">
+            <div className="creatSC_div"> 
 
                 <h1>Create Contract</h1>
 
@@ -65,6 +69,10 @@ class CreateSC extends React.Component {
                             <DatePicker />
 
                         </Form.Item>
+                        <Form.Item label="Payout Time" name="payoutTime">
+                            <DatePicker showTime/>
+
+                        </Form.Item>
 
                         <Form.Item
                             label="Duration"
@@ -92,15 +100,22 @@ class CreateSC extends React.Component {
                     </div>
                     <div className='half_div'>
                         <Form.Item
-                            label="Fee"
+                            label="Fee (in ETH)"
                             name="fee"
                         // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
-                            <Input prefix="$" />
+                            <InputNumber prefix="$" />
                         </Form.Item>
                         <Form.Item
                             label="Location"
                             name="location"
+                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Address"
+                            name="receiverAddress"
                         // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
                             <Input />

@@ -112,10 +112,16 @@ class Metamask extends React.Component {
 
     render() {
         var connectMetamaskButton = ""
+        var createSCButton = ""
         if (this.state.account === "") {
             connectMetamaskButton = 
             <Button onClick = {this.connectMetamask}>
                 Connect Metamask
+            </Button>
+        } else {
+            createSCButton = 
+            <Button href="/create">
+                Create Smart Contract
             </Button>
         }
 
@@ -143,38 +149,7 @@ class Metamask extends React.Component {
                 <h1>Welcome to Apollo</h1>
                 <h2>Account Connected: {this.state.account}</h2>
                 {connectMetamaskButton}
-                <br/>
-                <div>
-                    <h1>Enter Contract Details</h1>
-                    <Input
-                        type = "number"
-                        placeholder = "Amount"
-                        name = "formAmount"
-                        value = {this.state.formAmount}
-                        onChange = {this.handleInput}
-                    />
-                    <br/>
-                    <Input
-                        type = "number"
-                        placeholder = "Payout Time"
-                        name = "formPayoutTime"
-                        value = {this.state.formPayoutTime}
-                        onChange = {this.handleInput}
-                    />
-                    <br/>
-                    <Input
-                        type = "text"
-                        placeholder = "Destination"
-                        name = "formDestination"
-                        value = {this.state.formDestination}
-                        onChange = {this.handleInput}
-                    />
-                    <br/>
-                    <Button onClick = {this.createContract}>
-                        Submit Contract
-                    </Button>
-                </div>
-                <br/>
+                {createSCButton}
                 <br/>
                 <br/>
                 <div>
