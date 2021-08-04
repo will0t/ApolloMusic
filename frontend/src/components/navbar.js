@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/navbar.css';
 import logo from './logos/APOLLO_LOGO.png'
+import LoginButton from './LoginButton';
 
 class Navbar extends React.Component {
     render() {
@@ -16,6 +17,9 @@ class Navbar extends React.Component {
                     </li>
                     <li className = "navbarItem">
                         <Link to = "/" className = "navbarLink"> Reviews </Link>
+                    </li>
+                    <li>
+                        <LoginButton/>
                     </li>
                 </ul>
             </div>
