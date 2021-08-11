@@ -1,36 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/gridnavbar.css';
-import logo from './logos/APOLLO_LOGO.png'
+import logo from './logos/ApolloNoSloganWhiteSmall-1.png';
+import { AiOutlineSearch } from "react-icons/ai";                                                                                                  
 
 // Searchbar
 const SearchBar = ({keyword,setKeyword}) => {
   return (
-    <input 
-     className = "searchBar"
-     key="random1"
-     value={keyword}
-     placeholder={"search account"}
-     //onChange={(e) => setKeyword(e.target.value)}
-    />
+      <div>
+            <input 
+                className = "searchBar"
+                key="random1"
+                value={keyword}
+                placeholder={"People Search"}
+                //onChange={(e) => setKeyword(e.target.value)}
+            />
+      </div>
+
   );
 }
 
 class GridNavBar extends React.Component {
     render() {
         return (
-            <div className = "navbarholder">
-                <div className = "navbarItem">
-                    <img src={logo} className = "gridnavbarLogo" alt = "logo"/>
+            <div className="navbarholder">
+                <Link to="/" className="logoBackground">
+                    <img src={logo} className="gridnavbarLogo" alt="logo"/>
+                </Link>
+                <div className="searchContainer">
+                    <AiOutlineSearch className="searchIcon"/>
                 </div>
-                <div className = "navbarItem">
+                <div className="navbarItem">
                     <SearchBar />
                 </div>
-                <div className = "navbarItem">
-                    <Link to = "/" className = "gridnavbarLink"> Contracts </Link>
-                </div>
-                <div className = "navbarItem">
-                    <Link to = "/" className = "gridnavbarLink"> Reviews </Link>
+                <div className="navbarRight">
+                    <span>
+                        Profile Name
+                    </span>
                 </div>
             </div>
         )

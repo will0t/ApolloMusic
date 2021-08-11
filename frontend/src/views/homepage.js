@@ -1,4 +1,5 @@
 import React from 'react';
+import Content from '../components/content.js';
 // Ant Design CSS
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
@@ -6,16 +7,13 @@ import { Button } from 'antd';
 class Homepage extends React.Component{
     render() {
         return(
-            <div>
-                <h1>
-                    Homepage
-                </h1>
+            <Content heading="Homepage">
                 <div>
                     <Button type="primary" size='large' href="/metamask">
-                    Setup MetaMask
+                        Proceed to setup Metamask
                     </Button>
                 </div>
-            </div>
+            </Content>
         )
     }
 }

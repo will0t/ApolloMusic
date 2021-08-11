@@ -1,11 +1,16 @@
+// Imports
 import React from 'react';
 import Web3 from 'web3';
-import '../App.css';
-import Apollo from '../contracts/ApolloAgreement.json';
-import { Input } from 'reactstrap';
-// Ant Design CSS
-import 'antd/dist/antd.css';
 import { Button } from 'antd';
+import Content from '../components/content.js';
+
+// CSS
+import '../App.css';
+import 'antd/dist/antd.css';
+import '../css/metamask.css';
+
+// Misc.
+import Apollo from '../contracts/ApolloAgreement.json';
 
 class Metamask extends React.Component {
 
@@ -59,6 +64,14 @@ class Metamask extends React.Component {
             const netId = await web3.eth.net.getId()
             const accounts = await web3.eth.getAccounts()
 
+            // Subscribe to events
+            // var newAgreementSub = web3.eth.subscribe("NewAgreement") = () => {
+            //     if (!error) {console.log(result)}
+            // }
+            // var paidAgreementSub = web3.eth.subscribe("PaidAgreement") = () => {
+            //     if (!error) {console.log(result)}
+            // }
+
             // Load Balance
             if (typeof accounts[0] !== 'undefined') {
                 const balance = await web3.eth.getBalance(accounts[0])
@@ -68,7 +81,7 @@ class Metamask extends React.Component {
                     web3: web3
                 })
             } else {
-                window.alert('Please login and connect your Metamask account')
+                // window.alert('Please login and connect your Metamask account')
             }
 
             // Load Contracts
@@ -115,12 +128,12 @@ class Metamask extends React.Component {
         var createSCButton = ""
         if (this.state.account === "") {
             connectMetamaskButton = 
-            <Button onClick = {this.connectMetamask}>
+            <Button onClick = {this.connectMetamask} style={{"background": "#3B86FF", "border-color": "#3B86FF", "color": "#FFFFFFDE"}}>
                 Connect Metamask
             </Button>
         } else {
             createSCButton = 
-            <Button href="/create">
+            <Button href="/create" style={{"background": "#3B86FF", "border-color": "#3B86FF", "color": "#FFFFFFDE"}}>
                 Create Smart Contract
             </Button>
         }
@@ -144,23 +157,37 @@ class Metamask extends React.Component {
             )
         }
 
+        // Text to show in body
+        var text = <span>
+            Your Metamask Account is currently <span class="pending">NOT CONNECTED</span> to the Apollo Client. <br/> 
+            <br/>
+            To connect your Metamask Account, follow these steps: <br/>
+            1. Click {connectMetamaskButton} which will open your Metamask plugin <br/>
+            2. On the plugin, connect (only one) Metamask Account <br/>
+            3. On page refresh, this text should disappear and you should see the Account Address connected displayed instead.
+        </span>
+
+        if (this.state.account !== "") {
+            text = <span>
+                Your Metamask Account is currently <span class="confirm">CONNECTED</span> to the Apollo Client: {this.state.account}<br/>
+                <br/>
+                With a connected account, you may proceed to {createSCButton}
+            </span>
+        }
+
         return (
-            <div className = "content-wrapper">
-                <h1>Welcome to Apollo</h1>
-                <h2>Account Connected: {this.state.account}</h2>
-                {connectMetamaskButton}
-                {createSCButton}
-                <br/>
-                <br/>
-                <div>
+            <Content heading="Metamask Integration">
+                {text}
+
+                {/* <div>
                     <h1> Agreements </h1>
                     <Button onClick = {this.getAgreementsByPromoter}>
                         Retrieve Agreements    
                     </Button>
                     {agreements}
 
-                </div>
-            </div>
+                </div> */}
+            </Content>
         )
 
     }

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Component Imports
 import GridNavBar from './components/gridnavbar.js';
+import Sidebar from './components/sidebar.js';
 
 
 // Views Imports
@@ -20,9 +21,8 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className = "header">
-          <GridNavBar/>
-        </div>
+        <GridNavBar/>
+        <Sidebar/>
         <div className = "content-wrapper">
           <Switch>
             <Route path = "/" exact component = {Homepage}/>
