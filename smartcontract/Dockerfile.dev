@@ -1,0 +1,25 @@
+### --- BASE IMAGE --- ###
+FROM node:lts-alpine
+
+### --- ENVIRONMENT --- ###
+
+ENV SRC_DIR "/app"
+
+ENV TRUFFLE_VERSION "5.1.65"
+
+### --- SETUP --- ###
+RUN npm install -g truffle@$TRUFFLE_VERSION
+# RUN npm config set bin-links false
+
+RUN mkdir -p $SRC_DIR
+WORKDIR $SRC_DIR
+
+COPY ./contracts ./contracts
+COPY ./migrations ./migrations
+COPY ./test ./test
+COPY ./truffle-config.js ./truffle-config.js
+COPY ./package*.json ./
+
+RUN npm install -g truffle
+RUN npm ci
+CMD ["sh"]

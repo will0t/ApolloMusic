@@ -1,0 +1,25 @@
+
+.outer-div{
+    margin: 20px;
+    padding: 50px;
+    padding-top: 20px;
+    margin-left: 10%;
+    max-width: 1200px;
+    min-width: 1000px;
+    height: 800px;
+    border: 5px solid;
+}
+
+.half_div{
+    width:50%;
+    float:left;
+}
+
+.title-div{
+    text-align: center;
+    font-size: 45px;
+    color: #358bee;
+    font-weight: 900;
+    font-style: normal;
+    padding-bottom: 10px;
+}

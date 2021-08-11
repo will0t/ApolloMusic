@@ -1,0 +1,46 @@
+version: '3'
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./backend
+    ports:
+      - '8000:8000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./backend/app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+  frontend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    ports:
+      - '8080:3000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+  truffle:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./smartcontract
+    ports:
+      - '9545:9545'
+    stdin_open: true
+    tty: true
+    volumes:
+      - /app/node_modules
+      - ./smartcontract:/app
+    depends_on:
+      - devrpc
+  devrpc:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./devrpc
+    ports:
+      - '8545:8545'
+    volumes:
+      - ./devrpc/ganache_data:/ganache_data

@@ -1,0 +1,32 @@
+body{
+	background-color: #121212;
+}
+
+h1{
+	color: #E8E8E8;
+}
+
+h2{
+	color: #E8E8E8;
+}
+
+.content-wrapper{
+	margin-top: 20px;
+	margin-left: 260px;
+	color: #FFFFFFDE;
+	position: relative;
+}
+
+.confirm {
+	color: #5EE2A0;
+	font-weight: bold;
+}
+
+.pending {
+	color: #FEC163;
+	font-weight: bold;
+}
+
+.declined {
+	color: #FF4141;
+}

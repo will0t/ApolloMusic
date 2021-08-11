@@ -1,0 +1,27 @@
+# Install our base image
+# lts = long-term support, i.e. the latest stable version of Node
+#       specifically, Node's LTS version is currently 14.16.1 (April 2021)
+# alpine = Alpine Linux, the minimal Linux image: https://hub.docker.com/_/alpine
+FROM node:lts-alpine
+
+# The WORKDIR instruction sets the working directory for any
+# RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow
+# it in the Dockerfile. If the WORKDIR doesn’t exist, it will
+# be created even if it’s not used in any subsequent Dockerfile
+# instruction.
+WORKDIR '/app'
+
+# Copy package.json and package-lock.json into the WORKDIR in the container
+# COPY <source> <destination-folder>
+# if destination-folder == "./" then it is WORKDIR implicitly
+# copy both package.json and package-lock.json
+COPY ./package*.json ./
+
+# install the dependencies in package.json
+RUN npm install
+
+# Copy the rest of the code from current directory into the WORKDIR
+COPY . .
+
+# CMD takes a list of strings which form a shell commend when concatenated
+CMD ["yarn", "start"]
