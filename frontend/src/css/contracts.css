@@ -2,23 +2,19 @@
     padding-left: 0;
   }
   
-  .tab-list-item {
+.tab-list-item {
     display: inline-block;
     list-style: none;
     margin-bottom: -1px;
     padding: 0.5rem 0.75rem;
-  }
+}
   
-  .tab-list-active {
+.tab-list-active {
     background-color: #FFFFFF3E;
-  }
+}
 
-  .declineButton {
-    /* margin-top: 34px;
-    margin-bottom: 29px;
-    margin-left: 50px;
-    margin-right: 50px; */
-    right: -330px;
+.declineButton {
+    right: -250px;
     width: 33px;
     height: 33px;
     position: absolute;
@@ -27,11 +23,7 @@
 }
 
 .declineButton {
-    /* margin-top: 34px;
-    margin-bottom: 29px;
-    margin-left: 50px;
-    margin-right: 50px; */
-    right: -330px;
+    right: -250px;
     width: 33px;
     height: 33px;
     position: absolute;
@@ -39,13 +31,8 @@
     border-color: #EB5757;
 }
 
-
 .declineButton:enabled {
-    /* margin-top: 34px;
-    margin-bottom: 29px;
-    
-    margin-right: 50px; */
-    right: -330px;
+    right: -250px;
     width: 33px;
     height: 33px;
     position: relative;
@@ -54,11 +41,7 @@
 }
 
 .acceptButton {
-    /* margin-top: 34px;
-    margin-bottom: 29px;
-    margin-left: 50px;
-    margin-right: 50px; */
-    right: -350px;
+    right: -275px;
     width: 33px;
     height: 33px;
     position: relative;
@@ -67,11 +50,7 @@
 }
 
 .acceptButton:hover {
-    /* margin-top: 34px;
-    margin-bottom: 29px;
-    margin-left: 50px;
-    margin-right: 50px; */
-    right: -350px;
+    right: -275px;
     width: 33px;
     height: 33px;
     position: relative;
@@ -80,13 +59,8 @@
     
 }
 
-
 .acceptButton:enabled {
-    /* margin-top: 34px;
-    margin-bottom: 29px;
-    margin-left: 50px;
-    margin-right: 50px; */
-    right: -350px;
+    right: -275px;
     width: 33px;
     height: 33px;
     position: relative;
@@ -106,7 +80,7 @@
     overflow-y: scroll;
   }
   
-  .react-scrollable-list-item {
+.react-scrollable-list-item {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -116,6 +90,52 @@
     border-bottom: rgb(0, 0, 0) solid 1px;
     pointer-events: none;
     color: #ffffff;
+}
+
+.event-header {
+    font-size: 20px;
+    padding-top: 5px;
+  }
+  
+.box {
+    display: flex;
+    padding-top: 6px;
+  }
+  
+  .date-header {
+    font-size: 14px;
+    width: 150px;
+    
+  }
+
+  .date-text {
+    color: rgb(255, 255, 255);
+    width: 150px;
+    
+  }
+
+  .fee-header {
+    width: 150px;
+  }
+  
+  .fee-text {
+    width: 150px;
+  }
+
+  .duration-header {
+    width: 150px;
+  }
+  
+  .duration-text {
+    width: 150px;
+  }
+
+  .where-header {
+    width: 200px;
+  }
+  
+  .where-text {
+    width: 200px;
   }
 
 

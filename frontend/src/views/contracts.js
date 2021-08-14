@@ -6,45 +6,58 @@ import Tabs from '../components/Tabs.js';
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";  
 import ReactScrollableList from 'react-scrollable-list';
 
+// define invitation item
 let invitations = []
 for (let i = 0; i < 10; i++) {
   invitations.push({ id: i, 
     content: 
     <div label="Invitations"> 
-    <h2>EDC - Insomniac Events</h2>
-    When:
-    09/08/2021
-    Fee:
-    $21,350
-    Duration:
-    30 Minutes
-    Where:
-    Empire Polo Club, California
-    {/* decline button */}
-    <Button type="primary" size='small' className="declineButton">
-    <AiOutlineClose className="sideIcon"/>
-    </Button>
-    {/* accept button */}
-    <Button type="primary" size='small' className="acceptButton">
-    <AiOutlineCheck className="sideIcon"/>
-    </Button>
+    <div class="event-header"> EDC - Insomniac Events </div>
+    <div class="box">
+        <div> When: 
+            <div class="date-text"> 09/08/2021 </div>
+        </div> 
+        <div class="fee-header"> Fee: 
+            <div class="fee-text"> $21,350 </div>
+        </div>
+        <div class="duration-header"> Duration:
+            <div class="duration-text"> 60 Minutes </div>
+        </div> 
+        <div class="where-header"> Where: 
+            <div class="where-text"> Empire Polo Club, California </div>
+        </div> 
+        <Button type="primary" size='small' className="declineButton">
+            <AiOutlineClose className="sideIcon"/>
+        </Button>
+        <Button type="primary" size='small' className="acceptButton">
+            <AiOutlineCheck className="sideIcon"/>
+        </Button>
+    </div>
     </div>
     })
 }
 
+// define contract item
 let contracts = []
 for (let i = 0; i < 3; i++) {
   contracts.push({ id: i, 
     content: 
     <div label="Invitations"> 
-    <h2>Coachella</h2>
-    09/08/2021
-    Fee:
-    $21,350
-    Duration:
-    30 Minutes
-    Where:
-    Empire Polo Club, California
+    <div class="event-header"> EDC - Insomniac Events </div>
+    <div class="box">
+        <div> When: 
+            <div class="date-text"> 09/08/2021 </div>
+        </div> 
+        <div class="fee-header"> Fee: 
+            <div class="fee-text"> $21,350 </div>
+        </div>
+        <div class="duration-header"> Duration:
+            <div class="duration-text"> 60 Minutes </div>
+        </div> 
+        <div class="where-header"> Where: 
+            <div class="where-text"> Empire Polo Club, California </div>
+        </div> 
+    </div>
     </div>
     })
 }
