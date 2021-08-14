@@ -6,13 +6,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GridNavBar from './components/gridnavbar.js';
 import Sidebar from './components/sidebar.js';
 
-
 // Views Imports
 import Homepage from './views/homepage.js';
 import Metamask from './views/metamask.js';
 import CreateSC from './views/createSC.js';
 import ConfirmSC from './views/confirmSC.js';
 import FinishedSC from './views/finishedSC.js';
+import Contracts from './views/contracts.js';
 
 // CSS
 import './css/general.css';
@@ -30,6 +30,7 @@ class App extends React.Component {
             <Route path = "/create" exact component = {CreateSC}/>
             <Route path = "/confirm" exact component = {ConfirmSC}/>
             <Route path = "/success" exact component = {FinishedSC}/>
+            <Route path = "/contracts" exact component = {Contracts}/>
           </Switch>
         </div>
       </Router>
