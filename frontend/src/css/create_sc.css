@@ -1,23 +1,74 @@
 .createSC_div{
-    padding-left: 50px;
-    padding-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .half_div{
-    background-color: #A4A9F5;
-    color: #79FFB1;
     width:50%;
-    height: 600px;
+    height: 580px;
     float:left;
     padding-left: 30px;
-    padding-top: 20px;
+    padding-top: 30px;
+    background: var(--dialouge-background) 0% 0% no-repeat padding-box;
+    background: #1D1D1D 0% 0% no-repeat padding-box;
+    opacity: 1;
 }
 
-label{
-    color:rgba(0, 0, 205, 0.733);
-    font-weight: 500;
+.left-half-border{
+    border-top: 1px solid #3B86FF;
+    border-left: 1px solid #3B86FF;
+    border-bottom:1px solid #3B86FF;
 }
 
-Form{
-    Fontcolor: #79FFB1;
+.right-half-border{
+    border-top: 1px solid #3B86FF;
+    border-right: 1px solid #3B86FF;
+    border-bottom: 1px solid #3B86FF;
+}
+
+/* label */
+.ant-form-item-label > label{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    color: #3B86FF;
+    font-size: 14px;
+}
+
+.create-title{
+    border-bottom: 2px solid #3B86FF;
+    color:white;
+    font-size: 28px;
+    font-family: fantasy;
+}
+
+.ant-input {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5715;
+    background: var(--dialouge-background) 0% 0% no-repeat padding-box;
+    background: #1D1D1D 0% 0% no-repeat padding-box;
+    opacity: 1;
+    background-image: none;
+    border: 0;
+    border-bottom: 1px solid #3B86FF;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+.button-div{
+    float: left;
+    padding-right: 20px;
 }

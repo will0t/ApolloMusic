@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, DatePicker, Upload, InputNumber} from 'antd';
+import { Form, Input, Button, DatePicker, Upload, InputNumber } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -35,9 +35,12 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div className="creatSC_div"> 
+            <div className="createSC_div">
 
-                <h1>Create Contract</h1>
+                <div className="create-title">
+                    Create Contract
+                </div>
+
 
 
                 <Form
@@ -54,11 +57,11 @@ class CreateSC extends React.Component {
                     onFinishFailed={onFinishFailed}
 
                 >
-                    <div className='half_div'>
+                    <div className='half_div left-half-border'>
                         <Form.Item
                             label="Title"
                             name="title"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                        //rules={[{ required: true, message: 'please input the title' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -70,16 +73,16 @@ class CreateSC extends React.Component {
 
                         </Form.Item>
                         <Form.Item label="Payout Time" name="payoutTime">
-                            <DatePicker showTime/>
+                            <DatePicker showTime />
 
                         </Form.Item>
 
                         <Form.Item
                             label="Duration"
                             name="Duration"
-                        // rules={[{ required: true, message: 'Duration' }]}
+                       
                         >
-                            <Input suffix="minutes" />
+                            <Input />
                         </Form.Item>
 
                         <Form.Item
@@ -98,11 +101,11 @@ class CreateSC extends React.Component {
 
 
                     </div>
-                    <div className='half_div'>
+                    <div className='half_div right-half-border'>
                         <Form.Item
                             label="Fee (in ETH)"
                             name="fee"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'please input the fee' }]}
                         >
                             <InputNumber prefix="$" />
                         </Form.Item>
@@ -116,7 +119,7 @@ class CreateSC extends React.Component {
                         <Form.Item
                             label="Receiver Address"
                             name="receiverAddress"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'please input Receiver Address' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -137,9 +140,23 @@ class CreateSC extends React.Component {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" size='large' htmlType="submit">
-                                Submit
-                            </Button>
+                            <div>
+                                <div className="button-div">
+                                    <Form.Item>
+                                        <Button type="primary" size='large' htmlType="submit">
+                                            Submit
+                                        </Button>
+                                    </Form.Item>
+                                </div>
+
+                                <div>
+                                    <Form.Item>
+                                        <Button type="primary" size='large' ghost>
+                                            Cancel
+                                        </Button>
+                                    </Form.Item>
+                                </div>
+                            </div>
                         </Form.Item>
 
                     </div>
