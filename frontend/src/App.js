@@ -12,6 +12,7 @@ import Homepage from './views/homepage.js';
 import Metamask from './views/metamask.js';
 import CreateSC from './views/createSC.js';
 import ConfirmSC from './views/confirmSC.js';
+import ContractDetail from './views/contractDetail.js';
 import FinishedSC from './views/finishedSC.js';
 
 // CSS
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route path = "/metamask" exact component = {Metamask}/>
             <Route path = "/create" exact component = {CreateSC}/>
             <Route path = "/confirm" exact component = {ConfirmSC}/>
+            <Route path = "/contractDetail" exact component = {ContractDetail}/>
             <Route path = "/success" exact component = {FinishedSC}/>
           </Switch>
         </div>
