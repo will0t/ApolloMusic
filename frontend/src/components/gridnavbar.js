@@ -25,12 +25,15 @@ const SearchBar = ({ keyword, setKeyword }) => {
 
 const GridNavBar = () => {
     const authContext = useAuth0();
-    let button;
+    let userDetails;
 
     if (authContext.isAuthenticated) {
-        button = <LogoutButton/>;
+        userDetails = <div>
+                <span>Profile Name</span>
+            <LogoutButton/>
+        </div>;
     } else {
-        button = <LoginButton/>
+        userDetails = <LoginButton/>
     }
     return (
       <div className="navbarholder">
@@ -44,12 +47,7 @@ const GridNavBar = () => {
               <SearchBar />
           </div>
           <div className="navbarRight">
-              <span>
-                  Profile Name
-              </span>
-              <span>
-                {button}
-              </span>
+            {userDetails}
           </div>
       </div>
   );
