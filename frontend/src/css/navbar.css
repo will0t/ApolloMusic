@@ -6,7 +6,7 @@
 
 .navbarList {
     list-style-type: none;
-    background-color: #330945;
+    background-color: #292929;
     margin: 0;
     padding: 0;
     padding-left: 3px;
@@ -30,7 +30,7 @@
 .navbarLink {
     height: inherit;
     font-size: 24px;
-    color: #79FFB1;
+    color: #ffffff;
     padding: 5px 18px;
     text-decoration: none;
     display: block;
@@ -40,13 +40,13 @@
 
 .navbarLink:hover {
     text-decoration: none;
-    color: #79FFB1;
+    color: #ffffff;
     display: block;
     text-align: center;
     font-weight: 100;
     
     transition: 0.3s ease;
-    background-color: #A4A9F5;
+    background-color: #00000029;
     text-decoration: none;
 }
 

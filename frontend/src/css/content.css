@@ -1,0 +1,22 @@
+.contentContainer {
+    margin-top: 7vh;
+    margin-bottom: 10vh;
+    margin-left: 7vh;
+    margin-right: 7vh;
+    font-family: 'Source Sans Pro';
+}
+
+.contentHeading {
+    font-size: 28px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.contentBody {
+    border: 1px solid #FFFFFF0D;
+    padding: 10px;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+    padding-bottom: 10%;
+    font-size: 18px;
+}
