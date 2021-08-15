@@ -1,6 +1,6 @@
 // React Imports
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Component Imports
 import GridNavBar from './components/gridnavbar.js';
@@ -16,7 +16,7 @@ import ContractDetail from './views/contractDetail.js';
 import FinishedSC from './views/finishedSC.js';
 
 // CSS
-import './css/general.css';
+import "./css/general.css";
 
 class App extends React.Component {
   render() {
@@ -35,7 +35,7 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
-    )
+    );
   }
 }
 
