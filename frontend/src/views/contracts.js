@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import Tabs from '../components/Tabs.js'; 
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";  
 import ReactScrollableList from 'react-scrollable-list';
+import Content from '../components/content.js';
 
 // define invitation item
 let invitations = []
@@ -66,8 +67,7 @@ class Contracts extends React.Component{
     
     render() {
         return (
-            <div>
-              <h1>Contracts</h1>
+            <Content heading="Contracts">
              <Tabs> 
                 {/* Invitations tab */}
                <div label="Invitations"> 
@@ -93,7 +93,7 @@ class Contracts extends React.Component{
                 Review list goes here 
                </div> 
              </Tabs> 
-            </div>
+            </Content>
           );
         }
     }
