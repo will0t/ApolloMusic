@@ -11,7 +11,6 @@ import '../css/metamask.css';
 
 // Misc.
 import Apollo from '../contracts/ApolloAgreement.json';
-
 class Metamask extends React.Component {
 
     constructor(props) {
@@ -29,12 +28,33 @@ class Metamask extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.createContract = this.createContract.bind(this);
         this.getAgreementsByPromoter = this.getAgreementsByPromoter.bind(this);
+        this.connectMetamask = this.connectMetamask.bind(this);
+    }
+
+    async componentWillMount() {
+        await this.loadBlockchainData()
     }
 
     connectMetamask() {
         window.ethereum.request({
             method: 'eth_requestAccounts'
-        });
+        })
+        .then(
+            setInterval(() => {
+                const web3 = new Web3(window.ethereum)
+                web3.eth.getAccounts().then(r => {
+                    if (r.length > 0) { 
+                        window.location.reload()
+                    }
+                })
+            }, 1000)
+        )
+        .catch(error => {
+            console.log(error);
+            if (error.code === "-32002") {
+                window.alert('Metamask is currently in action, close window')
+            }
+        })
     }
 
     createContract() {
@@ -52,10 +72,6 @@ class Metamask extends React.Component {
         this.setState({
             [name]: value
         })
-    }
-
-    async componentWillMount() {
-        await this.loadBlockchainData()
     }
 
     async loadBlockchainData() {
@@ -159,7 +175,7 @@ class Metamask extends React.Component {
 
         // Text to show in body
         var text = <span>
-            Your Metamask Account is currently <span class="pending">NOT CONNECTED</span> to the Apollo Client. <br/> 
+            Your Metamask Account is currently <span className="pending">NOT CONNECTED</span> to the Apollo Client. <br/> 
             <br/>
             To connect your Metamask Account, follow these steps: <br/>
             1. Click {connectMetamaskButton} which will open your Metamask plugin <br/>
@@ -169,7 +185,7 @@ class Metamask extends React.Component {
 
         if (this.state.account !== "") {
             text = <span>
-                Your Metamask Account is currently <span class="confirm">CONNECTED</span> to the Apollo Client: {this.state.account}<br/>
+                Your Metamask Account is currently <span className="confirm">CONNECTED</span> to the Apollo Client: {this.state.account}<br/>
                 <br/>
                 With a connected account, you may proceed to {createSCButton}
             </span>
