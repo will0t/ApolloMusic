@@ -13,10 +13,10 @@ class Sidebar extends React.Component {
                 <Button type="primary" size='large' href="/metamask" className="sideButton">
                     Setup Metamask
                 </Button>
-                <Link to="/" className="sideLink">
+                <Link to="/contracts" className="sideLink" >
                     <div className="sideItem">
                             <AiOutlineForm className="sideIcon"/>
-                            <span className="sideLinkText">
+                            <span className="sideLinkText" >
                                 Contracts
                             </span>
                     </div>

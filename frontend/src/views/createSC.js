@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, DatePicker, Upload, InputNumber } from 'antd';
+import { Form, Input, Button, DatePicker, Upload, InputNumber} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -35,12 +35,9 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div className="createSC_div">
+            <div className="creatSC_div"> 
 
-                <div className="create-title">
-                    Create Contract
-                </div>
-
+                <h1>Create Contract</h1>
 
 
                 <Form
@@ -57,11 +54,11 @@ class CreateSC extends React.Component {
                     onFinishFailed={onFinishFailed}
 
                 >
-                    <div className='half_div left-half-border'>
+                    <div className='half_div'>
                         <Form.Item
                             label="Title"
                             name="title"
-                        //rules={[{ required: true, message: 'please input the title' }]}
+                        // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -73,16 +70,16 @@ class CreateSC extends React.Component {
 
                         </Form.Item>
                         <Form.Item label="Payout Time" name="payoutTime">
-                            <DatePicker showTime />
+                            <DatePicker showTime/>
 
                         </Form.Item>
 
                         <Form.Item
                             label="Duration"
                             name="Duration"
-                       
+                        // rules={[{ required: true, message: 'Duration' }]}
                         >
-                            <Input />
+                            <Input suffix="minutes" />
                         </Form.Item>
 
                         <Form.Item
@@ -101,11 +98,11 @@ class CreateSC extends React.Component {
 
 
                     </div>
-                    <div className='half_div right-half-border'>
+                    <div className='half_div'>
                         <Form.Item
                             label="Fee (in ETH)"
                             name="fee"
-                            rules={[{ required: true, message: 'please input the fee' }]}
+                        // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
                             <InputNumber prefix="$" />
                         </Form.Item>
@@ -119,7 +116,7 @@ class CreateSC extends React.Component {
                         <Form.Item
                             label="Receiver Address"
                             name="receiverAddress"
-                            rules={[{ required: true, message: 'please input Receiver Address' }]}
+                        // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -140,23 +137,9 @@ class CreateSC extends React.Component {
                         </Form.Item>
 
                         <Form.Item>
-                            <div>
-                                <div className="button-div">
-                                    <Form.Item>
-                                        <Button type="primary" size='large' htmlType="submit">
-                                            Submit
-                                        </Button>
-                                    </Form.Item>
-                                </div>
-
-                                <div>
-                                    <Form.Item>
-                                        <Button type="primary" size='large' ghost>
-                                            Cancel
-                                        </Button>
-                                    </Form.Item>
-                                </div>
-                            </div>
+                            <Button type="primary" size='large' htmlType="submit">
+                                Submit
+                            </Button>
                         </Form.Item>
 
                     </div>
