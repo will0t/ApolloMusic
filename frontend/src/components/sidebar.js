@@ -4,7 +4,7 @@ import '../css/sidebar.css';
 // Ant Design CSS
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
-import { AiOutlineForm, AiFillStar } from "react-icons/ai";     
+import { AiOutlineForm, AiFillStar, AiFillHome } from "react-icons/ai";     
 
 class Sidebar extends React.Component {
     render() {
@@ -13,6 +13,14 @@ class Sidebar extends React.Component {
                 <Button type="primary" size='large' href="/metamask" className="sideButton">
                     Setup Metamask
                 </Button>
+                <Link to="/" className="sideLink" >
+                    <div className="sideItem">
+                            <AiFillHome className="sideIcon"/>
+                            <span className="sideLinkText" >
+                                Home
+                            </span>
+                    </div>
+                </Link>
                 <Link to="/contracts" className="sideLink" >
                     <div className="sideItem">
                             <AiOutlineForm className="sideIcon"/>
