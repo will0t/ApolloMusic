@@ -7,7 +7,7 @@
     display: inline-block;
     list-style: none;
     margin-bottom: -1px;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.75rem;    
 }
   
 .tab-list-active {
@@ -19,8 +19,8 @@
     width: 33px;
     height: 33px;
     position: absolute;
-    background-color: #EB5757;
-    border-color: #EB5757;
+    background-color: #FF4141;
+    border-color: #FF4141;
 }
 
 .declineButton {
@@ -28,8 +28,8 @@
     width: 33px;
     height: 33px;
     position: absolute;
-    background-color: #EB5757;
-    border-color: #EB5757;
+    background-color: #FF4141;
+    border-color: #FF4141;
 }
 
 .declineButton:enabled {
@@ -37,8 +37,8 @@
     width: 33px;
     height: 33px;
     position: relative;
-    background-color: #eb3e3e;
-    border-color: #eb3e3e;
+    background-color: #FF4141;
+    border-color: #FF4141;
 }
 
 .acceptButton {
@@ -46,8 +46,8 @@
     width: 33px;
     height: 33px;
     position: relative;
-    background-color: #68fab4;
-    border-color: #68fab4;
+    background-color: #5EE2A0;
+    border-color: #5EE2A0;
 }
 
 .acceptButton:hover {
@@ -55,8 +55,8 @@
     width: 33px;
     height: 33px;
     position: relative;
-    background-color: #22fd93;
-    border-color: #22fd93;
+    background-color: #5EE2A0;
+    border-color: #5EE2A0;
     
 }
 
@@ -65,8 +65,8 @@
     width: 33px;
     height: 33px;
     position: relative;
-    background-color: #68fab4;
-    border-color: #68fab4;
+    background-color: #5EE2A0;
+    border-color: #5EE2A0;
     
 }
 
@@ -91,6 +91,7 @@
     border-bottom: rgb(0, 0, 0) solid 1px;
     pointer-events: none;
     color: #ffffff;
+    background-color: #121212;
 }
 
 .event-header {

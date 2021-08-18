@@ -4,7 +4,7 @@ import '../css/sidebar.css';
 // Ant Design CSS
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
-import { AiOutlineForm, AiFillStar, AiFillHome } from "react-icons/ai";     
+import { AiTwotoneDiff, AiFillStar, AiFillHome } from "react-icons/ai";     
 
 class Sidebar extends React.Component {
     render() {
@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
                 </Link>
                 <Link to="/contracts" className="sideLink" >
                     <div className="sideItem">
-                            <AiOutlineForm className="sideIcon"/>
+                            <AiTwotoneDiff className="sideIcon"/>
                             <span className="sideLinkText" >
                                 Contracts
                             </span>
