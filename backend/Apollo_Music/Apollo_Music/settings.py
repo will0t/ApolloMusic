@@ -37,26 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'User',
-    'SmartContract',
-    'drf_yasg',
+    'User.apps.UserConfig',
+    'SmartContract.apps.SmartContractConfig',
     'graphene_django',
-    'rest_framework',
-    'rest_framework_swagger',
 ]
 
 
-SWAGGER_SETTINGS = {
-              'JSON_EDITOR': True,
-        }
-
-REST_FRAMEWORK = {
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser',
-    )
-}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -124,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Melbourne'
 
 USE_I18N = True
 
@@ -142,3 +128,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GRAPHENE = {
+    "SCHEMA": "django_root.schema.schema"
+}
+

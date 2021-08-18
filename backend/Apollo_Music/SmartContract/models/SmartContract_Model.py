@@ -21,7 +21,6 @@ class SmartContract(models.Model):
     Fee = models.DecimalField(max_digits=20, decimal_places=5)
     Location = models.CharField(max_length=20)
     Receivers = models.ManyToManyField(to="User.User")
-    Address = models.CharField(max_length=200)
     Attachments = models.FilePathField()
     generatedCode = models.CharField(max_length=100)
     status = models.SmallIntegerField(choices=CONTRACT_TYPE)
