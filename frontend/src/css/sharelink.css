@@ -1,0 +1,15 @@
+.sharelink-wrapper {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.social-share-button {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.social-share-button:hover:not(:active) {
+  opacity: 0.8;
+}

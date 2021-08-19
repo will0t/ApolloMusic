@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GridNavBar from './components/gridnavbar.js';
 import Sidebar from './components/sidebar.js';
 
-
 // Views Imports
 import Homepage from './views/homepage.js';
 import Metamask from './views/metamask.js';
@@ -15,6 +14,7 @@ import ConfirmSC from './views/confirmSC.js';
 import ContractDetail from './views/contractDetail.js';
 import FinishedSC from './views/finishedSC.js';
 import InvitationSC from './views/InvitationSC';
+import Contracts from './views/contracts.js';
 
 // CSS
 import "./css/general.css";
@@ -34,6 +34,7 @@ class App extends React.Component {
             <Route path = "/contractDetail" exact component = {ContractDetail}/>
             <Route path = "/success" exact component = {FinishedSC}/>
             <Route path ="/invite/:id" component = {InvitationSC}/>
+            <Route path = "/contracts" exact component = {Contracts}/>
           </Switch>
         </div>
       </Router>
