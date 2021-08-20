@@ -123,7 +123,7 @@ class ConfirmSC extends React.Component {
             console.log(destination)
             this.createAgreement(payoutTime, destination, amount)
 
-            this.props.history.push('/success', {values})
+            this.props.history.push('/success')
 
         };
 
@@ -152,7 +152,7 @@ class ConfirmSC extends React.Component {
                         span: 14,
                     }}
                     layout="vertical"
-                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress }}
+                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
 
@@ -218,6 +218,20 @@ class ConfirmSC extends React.Component {
                             name="location"
                         >
                             <Input disabled />
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver First Name"
+                            name="receiverFName"
+                            rules={[{ required: true, message: 'Please insert First Name of Receiver' }]}
+                        >
+                            <Input disabled/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Email"
+                            name="receiverEmail"
+                            rules={[{ required: true, type: "email", message: 'Please insert a valid email' }]}
+                        >
+                            <Input disabled/>
                         </Form.Item>
                         <Form.Item
                             label="Receiver Address"

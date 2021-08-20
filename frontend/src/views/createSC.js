@@ -35,7 +35,7 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div className="creatSC_div"> 
+            <div className="creatSC_div">
 
                 <h1>Create Contract</h1>
 
@@ -56,9 +56,9 @@ class CreateSC extends React.Component {
                 >
                     <div className='half_div'>
                         <Form.Item
-                            label="Title"
+                            label="Event Name"
                             name="title"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'Please insert event name' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -102,21 +102,35 @@ class CreateSC extends React.Component {
                         <Form.Item
                             label="Fee (in ETH)"
                             name="fee"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'Please insert fee of the contract in ETH' }]}
                         >
                             <InputNumber prefix="$" />
                         </Form.Item>
                         <Form.Item
                             label="Location"
                             name="location"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'Please insert location of event' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver First Name"
+                            name="receiverFName"
+                            rules={[{ required: true, message: 'Please insert First Name of Receiver' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Email"
+                            name="receiverEmail"
+                            rules={[{ required: true, type: "email", message: 'Please insert a valid email' }]}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
                             label="Receiver Address"
                             name="receiverAddress"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'Please insert receiver\'s wallet address' }]}
                         >
                             <Input />
                         </Form.Item>
