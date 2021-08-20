@@ -129,7 +129,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-GRAPHENE = {
-    "SCHEMA": "django_root.schema.schema"
-}
 
