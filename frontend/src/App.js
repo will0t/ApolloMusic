@@ -13,6 +13,7 @@ import CreateSC from './views/createSC.js';
 import ConfirmSC from './views/confirmSC.js';
 import ContractDetail from './views/contractDetail.js';
 import FinishedSC from './views/finishedSC.js';
+import InvitationSC from './views/InvitationSC';
 import Contracts from './views/contracts.js';
 
 // CSS
@@ -32,6 +33,7 @@ class App extends React.Component {
             <Route path = "/confirm" exact component = {ConfirmSC}/>
             <Route path = "/contractDetail" exact component = {ContractDetail}/>
             <Route path = "/success" exact component = {FinishedSC}/>
+            <Route path ="/invite/:id" component = {InvitationSC}/>
             <Route path = "/contracts" exact component = {Contracts}/>
           </Switch>
         </div>
