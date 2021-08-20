@@ -11,7 +11,7 @@ import {
 //NOTE: The link is hard coded here but to be made dynamic
 // once link generation has been completed.
 var shareUrl = "https://github.com/levimk/ApolloMusic"
-var receipient = "Jeff"
+var recipient = "Jeff"
 var sender = "Bob"
 
 var title = `Hey ${receipient}, ${sender} has shared a Smart Contract with you`

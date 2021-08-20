@@ -6,6 +6,9 @@ import Content from '../components/content.js';
 
 class FinishedSC extends React.Component {
     render() {
+        // get smart contract data from last page
+        let data = this.props.location.state.values;
+
         return (
             <Content heading="Smart Contract being deployed">
                 <Sharelink/>

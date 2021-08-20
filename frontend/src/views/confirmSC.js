@@ -35,7 +35,7 @@ class ConfirmSC extends React.Component {
             // Load Balance
             if (typeof accounts[0] !== 'undefined') {
                 this.setState({
-                    account: accounts[0], 
+                    account: accounts[0],
                     web3: web3
                 })
             } else {
@@ -55,7 +55,7 @@ class ConfirmSC extends React.Component {
 
         } else {
             window.alert('Metamask has not been installed. Please install Metamask.')
-        }     
+        }
     }
 
     async createAgreement(payoutTime, destination, amount) {
@@ -100,7 +100,7 @@ class ConfirmSC extends React.Component {
                 }
             ],
         };
-        
+
         const dateFormat = 'YYYY/MM/DD';
 
         //form dunction
@@ -123,7 +123,7 @@ class ConfirmSC extends React.Component {
             console.log(destination)
             this.createAgreement(payoutTime, destination, amount)
 
-            this.props.history.push('/success')
+            this.props.history.push('/success', {values})
 
         };
 
