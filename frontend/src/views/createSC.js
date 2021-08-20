@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, DatePicker, Upload, InputNumber} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import Content from '../components/content.js'
 
 import 'antd/dist/antd.css';
 
@@ -35,11 +36,8 @@ class CreateSC extends React.Component {
         };
 
         return (
+            <Content heading="Create Contract">
             <div className="creatSC_div"> 
-
-                <h1>Create Contract</h1>
-
-
                 <Form
                     name="basic"
                     labelCol={{
@@ -146,6 +144,7 @@ class CreateSC extends React.Component {
                 </Form>
 
             </div >
+            </Content>
         )
     }
 }

@@ -120,6 +120,8 @@ class Metamask extends React.Component {
         if (this.state.apollo !== 'undefined') {
             try {
                 await this.state.apollo.methods.createAgreement(payoutTime, [destination]).send({from: this.state.account, value: amount})
+                    .then(receipt => {console.log(receipt)})
+                    .catch(error => {console.log(error)})
             } catch (e) {
                 console.log('Error, createAgreement: ', e)
             }
@@ -195,14 +197,14 @@ class Metamask extends React.Component {
             <Content heading="Metamask Integration">
                 {text}
 
-                {/* <div>
+                <div>
                     <h1> Agreements </h1>
                     <Button onClick = {this.getAgreementsByPromoter}>
                         Retrieve Agreements    
                     </Button>
                     {agreements}
 
-                </div> */}
+                </div>
             </Content>
         )
 
