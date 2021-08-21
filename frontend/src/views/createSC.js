@@ -128,7 +128,7 @@ class CreateSC extends React.Component {
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            label="Receiver Address"
+                            label="Receiver Wallet Address"
                             name="receiverAddress"
                             rules={[{ required: true, message: 'Please insert receiver\'s wallet address' }]}
                         >

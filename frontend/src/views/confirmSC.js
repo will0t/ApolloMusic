@@ -19,7 +19,7 @@ class ConfirmSC extends React.Component {
             apollo: null,
             account: ''
         }
-        this.createAgreement = this.createAgreement.bind(this);
+        //this.createAgreement = this.createAgreement.bind(this);
     }
 
     async componentWillMount() {
@@ -57,7 +57,7 @@ class ConfirmSC extends React.Component {
             window.alert('Metamask has not been installed. Please install Metamask.')
         }
     }
-
+    /*
     async createAgreement(payoutTime, destination, amount) {
         if (this.state.apollo !== 'undefined') {
             try {
@@ -67,6 +67,7 @@ class ConfirmSC extends React.Component {
             }
         }
     }
+    */
 
     render() {
 
@@ -121,9 +122,11 @@ class ConfirmSC extends React.Component {
             console.log(amount)
             console.log(payoutTime)
             console.log(destination)
-            this.createAgreement(payoutTime, destination, amount)
-
-            this.props.history.push('/success')
+            //this.createAgreement(payoutTime, destination, amount)
+            this.props.history.push({
+                pathname: '/success',
+                state: { name: values.receiverFName }
+            });
 
         };
 
@@ -234,7 +237,7 @@ class ConfirmSC extends React.Component {
                             <Input disabled/>
                         </Form.Item>
                         <Form.Item
-                            label="Receiver Address"
+                            label="Receiver Wallet Address"
                             name="receiverAddress"
                         // rules={[{ required: true, message: 'Title of Booking' }]}
                         >

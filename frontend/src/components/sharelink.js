@@ -11,9 +11,8 @@ class Sharelink extends React.Component {
     render() {
         // Variable Declaration
         var shareUrl = "https://github.com/levimk/ApolloMusic"
-        var sender = "Bob"
 
-        var title = `Hey ${this.props.receiver}, ${sender} has shared a Smart Contract with you`
+        var title = `Hey ${this.props.receiver}, ${this.props.sender} has shared a Smart Contract with you`
         var body = "You can find the link to the smart contract below."
 
         return (
