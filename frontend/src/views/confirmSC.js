@@ -15,58 +15,12 @@ class ConfirmSC extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            web3: 'undefined',
-            apollo: null,
-            account: ''
         }
-        this.createAgreement = this.createAgreement.bind(this);
     }
 
     async componentWillMount() {
-        await this.loadBlockchainData()
     }
 
-    async loadBlockchainData() {
-        if (typeof window.ethereum !== 'undefined') {
-            const web3 = new Web3(window.ethereum)
-            const netId = await web3.eth.net.getId()
-            const accounts = await web3.eth.getAccounts()
-
-            // Load Balance
-            if (typeof accounts[0] !== 'undefined') {
-                this.setState({
-                    account: accounts[0], 
-                    web3: web3
-                })
-            } else {
-                window.alert('Please login and connect your Metamask account')
-            }
-
-            // Load Contracts
-            try {
-                const apollo = new web3.eth.Contract(Apollo.abi, Apollo.networks[netId].address)
-                this.setState({
-                    apollo: apollo
-                })
-            } catch (e) {
-                console.log('Error', e)
-                window.alert('Contracts are not deployed to the current network')
-            }
-
-        } else {
-            window.alert('Metamask has not been installed. Please install Metamask.')
-        }     
-    }
-
-    async createAgreement(payoutTime, destination, amount) {
-        if (this.state.apollo !== 'undefined') {
-            try {
-                await this.state.apollo.methods.createAgreement(payoutTime, [destination]).send({from: this.state.account, value: amount})
-            } catch (e) {
-                console.log('Error, createAgreement: ', e)
-            }
-        }
-    }
 
     render() {
 
@@ -109,21 +63,16 @@ class ConfirmSC extends React.Component {
 
             // deploy agreement onto smart contract
             let amount = values.fee;
-            // CHANGE this using epoch'ed value of values.payoutTime
-            // Need to add payoutTime
-            let testpayoutTime = new Date(moment(values.payoffTime, dateFormat)).getTime() / 1000
-            console.log(testpayoutTime)
-            let payoutTime = 1231233;
-            // CHANGE this using added destination field
+            let payoutTime = new Date(moment(values.payoutTime, dateFormat)).getTime() / 1000
             let destination = values.receiverAddress;
             // convert ETH to gwei
             amount = amount * 10**18
-            console.log(amount)
-            console.log(payoutTime)
-            console.log(destination)
-            this.createAgreement(payoutTime, destination, amount)
+            // this.createAgreement(payoutTime, destination, amount)
 
-            this.props.history.push('/success')
+            let newValues = "Nothing"
+
+
+            this.props.history.push('/success', {newValues})
 
         };
 

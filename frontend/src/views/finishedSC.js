@@ -5,7 +5,18 @@ import { Button } from 'antd';
 import Content from '../components/content.js';
 
 class FinishedSC extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+    
     render() {
+        //data from create contract
+        let data = this.props.location.state.values;
+        console.log(data)
+
         return (
             <Content heading="Smart Contract being deployed">
                 <Sharelink/>
