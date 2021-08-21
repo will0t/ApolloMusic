@@ -12,7 +12,7 @@ import Metamask from './views/metamask.js';
 import CreateSC from './views/createSC.js';
 import ConfirmSC from './views/confirmSC.js';
 import DetailSC from './views/detailSC.js';
-import FinishedSC from './views/finishedSC.js';
+import ShareSC from './views/shareSC.js';
 import InviteSC from './views/inviteSC.js';
 import Contracts from './views/contracts.js';
 
@@ -32,7 +32,7 @@ class App extends React.Component {
             <Route path = "/create" exact component = {CreateSC}/>
             <Route path = "/confirm" exact component = {ConfirmSC}/>
             <Route path = "/contractDetail" exact component = {DetailSC}/>
-            <Route path = "/success" exact component = {FinishedSC}/>
+            <Route path = "/success" exact component = {ShareSC}/>
             <Route path = "/invite/:id" component = {InviteSC}/>
             <Route path = "/contracts" exact component = {Contracts}/>
           </Switch>
