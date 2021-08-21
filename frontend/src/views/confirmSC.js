@@ -54,7 +54,7 @@ class ConfirmSC extends React.Component {
                 }
             ],
         };
-        
+
         const dateFormat = 'YYYY/MM/DD';
 
         //form dunction
@@ -67,12 +67,14 @@ class ConfirmSC extends React.Component {
             let destination = values.receiverAddress;
             // convert ETH to gwei
             amount = amount * 10**18
-            // this.createAgreement(payoutTime, destination, amount)
-
-            let newValues = "Nothing"
-
-
-            this.props.history.push('/success', {newValues})
+            console.log(amount)
+            console.log(payoutTime)
+            console.log(destination)
+            //this.createAgreement(payoutTime, destination, amount)
+            this.props.history.push({
+                pathname: '/success',
+                state: { name: values.receiverFName }
+            });
 
         };
 
@@ -101,7 +103,7 @@ class ConfirmSC extends React.Component {
                         span: 14,
                     }}
                     layout="vertical"
-                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress }}
+                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
 
@@ -169,7 +171,21 @@ class ConfirmSC extends React.Component {
                             <Input disabled />
                         </Form.Item>
                         <Form.Item
-                            label="Receiver Address"
+                            label="Receiver First Name"
+                            name="receiverFName"
+                            rules={[{ required: true, message: 'Please insert First Name of Receiver' }]}
+                        >
+                            <Input disabled/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Email"
+                            name="receiverEmail"
+                            rules={[{ required: true, type: "email", message: 'Please insert a valid email' }]}
+                        >
+                            <Input disabled/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Wallet Address"
                             name="receiverAddress"
                         // rules={[{ required: true, message: 'Title of Booking' }]}
                         >

@@ -7,18 +7,14 @@ import {
   EmailIcon
 } from "react-share";
 
-// Variable Declaration
-//NOTE: The link is hard coded here but to be made dynamic
-// once link generation has been completed.
-var shareUrl = "https://github.com/levimk/ApolloMusic"
-var receipient = "Jeff"
-var sender = "Bob"
-
-var title = `Hey ${receipient}, ${sender} has shared a Smart Contract with you`
-var body = "You can find the link to the smart contract below."
-
 class Sharelink extends React.Component {
     render() {
+        // Variable Declaration
+        var shareUrl = "https://github.com/levimk/ApolloMusic"
+
+        var title = `Hey ${this.props.receiver}, ${this.props.sender} has shared a Smart Contract with you`
+        var body = "You can find the link to the smart contract below."
+
         return (
             <div className = "sharelink-wrapper">
               <h2>Share the link to the Smart Contract </h2>
