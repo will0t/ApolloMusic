@@ -2,8 +2,10 @@
 # encoding: utf-8
 
 import graphene
+import datetime
 from graphene_django.types import DjangoObjectType
 from SmartContract.models import SmartContract
+from django.utils import timezone
 
 
 class SmartContractType(DjangoObjectType):
@@ -12,20 +14,27 @@ class SmartContractType(DjangoObjectType):
         fields = "__all__"
 
 
-# 定义动作约素输入类型
-class SmartContractInput(graphene.InputObjectType):
-    name = graphene.String(required=True)
-    email = graphene.String(required=True)
+# # 定义动作约素输入类型
+# class SmartContractInput(graphene.InputObjectType):
+#     name = graphene.String(required=True)
+#     email = graphene.String(required=True)
 
 
 class Query(graphene.ObjectType):
     all_smart_contract = graphene.List(SmartContractType)
-
+    get_smart_contract_withID = graphene.Field(SmartContractType, id=graphene.String())
 
     def resolve_all_smart_contract(self, info, **kwargs):
-        # 查询所有user的逻辑
+        # find all smartcontracts
         return SmartContract.objects.all()
 
+    def resolve_get_smart_contract_withID(self, info, id):
+        # get the smart contract with the id
+        sc_obj = SmartContract.objects.get(id=id)
+        if not sc_obj:
+            print("NO")
+            return None
+        return SmartContract.objects.get(id=id)
 
 
 # 定义一个创建user的mutation
@@ -33,14 +42,18 @@ class CreateSmartContract(graphene.Mutation):
     # api的输入参数
     class Arguments:
         #SmartContract_data = SmartContractInput(required=True)
-        #id = graphene.ID()
+        #scid = graphene.String(required=True)
         eventName = graphene.String(required=True)
-        startTime = graphene.Date()
-        payoutTime = graphene.Date()
-        duration = graphene.Int()
-        fee = graphene.Decimal()
-        status = graphene.Int()
-        version = graphene.Int()
+        startTime = graphene.DateTime(required=True)
+        #payoutTime = graphene.DateTime(required=True)
+        duration = graphene.Int(required=True)
+        #address = graphene.String(required=True)
+        city = graphene.String(required=True)
+        country = graphene.String(required=True)
+        payAmount = graphene.Decimal(required=True)
+        receiverEmail = graphene.String(required=True)
+        creatorName = graphene.String(required=True)
+        creatorEmail = graphene.String(required=True)
 
     # api的响应参数
     
@@ -56,9 +69,13 @@ class CreateSmartContract(graphene.Mutation):
         #sc_data = {}
         #sc_data["eventName"] = kwargs.get("eventName")
         sc_obj = SmartContract()
+        # status should be set to 0(created)
+        kwargs['status'] = 0
+        kwargs['version'] = 1
         for attr, value in kwargs.items():
             setattr(sc_obj, attr, value)
-        #sc_obj.save()
+        # sc_obj.save()
+        # ok = True
         try:
             sc_obj.save()
             ok = True
@@ -74,14 +91,19 @@ class UpdateSmartContract(graphene.Mutation):
     # api的输入参数
     class Arguments:
         #SmartContract_data = SmartContractInput(required=True)
-        id = graphene.ID()
+        id = graphene.String(required=True)
         eventName = graphene.String(required=True)
-        startTime = graphene.Date()
-        payoutTime = graphene.Date()
-        duration = graphene.Int()
-        fee = graphene.Decimal()
-        status = graphene.Int()
-        version = graphene.Int()
+        startTime = graphene.DateTime(required=True)
+        #payoutTime = graphene.DateTime(required=True)
+        duration = graphene.Int(required=True)
+        #address = graphene.String(required=True)
+        city = graphene.String(required=True)
+        country = graphene.String(required=True)
+        payAmount = graphene.Decimal(required=True)
+        receiverEmail = graphene.String(required=True)
+        creatorName = graphene.String(required=True)
+        creatorEmail = graphene.String(required=True)
+        status = graphene.Int(required=False)
 
     # api的响应参数
     
@@ -92,6 +114,9 @@ class UpdateSmartContract(graphene.Mutation):
     
     def mutate(self, info, **kwargs):
         sc_obj = SmartContract.objects.get(id=kwargs['id'])
+        if not sc_obj:
+            return UpdateSmartContract(ok=False)
+        kwargs['version'] = sc_obj.__dict__['version'] + 1
         for attr, value in kwargs.items():
             setattr(sc_obj, attr, value)
         #sc_obj.save()
@@ -100,11 +125,11 @@ class UpdateSmartContract(graphene.Mutation):
             ok = True
         except:
             ok = False
-        return CreateSmartContract(ok=ok, smart_contract=sc_obj)
+        return UpdateSmartContract(ok=ok, smart_contract=sc_obj)
 
 
 class UMutation(graphene.ObjectType):
-    update_smart_contract = CreateSmartContract.Field()
+    update_smart_contract = UpdateSmartContract.Field()
 
 
 class Mutation(
