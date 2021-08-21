@@ -3,12 +3,22 @@ import 'antd/dist/antd.css';
 import Sharelink from '../components/sharelink.js';
 import { Button } from 'antd';
 import Content from '../components/content.js';
+import { withAuth0 } from "@auth0/auth0-react";
 
 class FinishedSC extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+
     render() {
+        const authContext = this.props.auth0;
+
         return (
             <Content heading="Smart Contract being deployed">
-                <Sharelink/>
+                <Sharelink receiver={this.props.location.state.name} sender={authContext.user.nickname}/>
                 <Button href="/">
                     Click here to go back home
                 </Button>
@@ -17,4 +27,4 @@ class FinishedSC extends React.Component {
     }
 }
 
-export default FinishedSC
+export default withAuth0(FinishedSC);

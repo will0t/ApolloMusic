@@ -19,7 +19,7 @@ class ConfirmSC extends React.Component {
             apollo: null,
             account: ''
         }
-        this.createAgreement = this.createAgreement.bind(this);
+        //this.createAgreement = this.createAgreement.bind(this);
     }
 
     async componentWillMount() {
@@ -35,7 +35,7 @@ class ConfirmSC extends React.Component {
             // Load Balance
             if (typeof accounts[0] !== 'undefined') {
                 this.setState({
-                    account: accounts[0], 
+                    account: accounts[0],
                     web3: web3
                 })
             } else {
@@ -55,9 +55,9 @@ class ConfirmSC extends React.Component {
 
         } else {
             window.alert('Metamask has not been installed. Please install Metamask.')
-        }     
+        }
     }
-
+    /*
     async createAgreement(payoutTime, destination, amount) {
         if (this.state.apollo !== 'undefined') {
             try {
@@ -67,6 +67,7 @@ class ConfirmSC extends React.Component {
             }
         }
     }
+    */
 
     render() {
 
@@ -100,7 +101,7 @@ class ConfirmSC extends React.Component {
                 }
             ],
         };
-        
+
         const dateFormat = 'YYYY/MM/DD';
 
         //form dunction
@@ -121,9 +122,11 @@ class ConfirmSC extends React.Component {
             console.log(amount)
             console.log(payoutTime)
             console.log(destination)
-            this.createAgreement(payoutTime, destination, amount)
-
-            this.props.history.push('/success')
+            //this.createAgreement(payoutTime, destination, amount)
+            this.props.history.push({
+                pathname: '/success',
+                state: { name: values.receiverFName }
+            });
 
         };
 
@@ -152,7 +155,7 @@ class ConfirmSC extends React.Component {
                         span: 14,
                     }}
                     layout="vertical"
-                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress }}
+                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
 
@@ -220,7 +223,21 @@ class ConfirmSC extends React.Component {
                             <Input disabled />
                         </Form.Item>
                         <Form.Item
-                            label="Receiver Address"
+                            label="Receiver First Name"
+                            name="receiverFName"
+                            rules={[{ required: true, message: 'Please insert First Name of Receiver' }]}
+                        >
+                            <Input disabled/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Email"
+                            name="receiverEmail"
+                            rules={[{ required: true, type: "email", message: 'Please insert a valid email' }]}
+                        >
+                            <Input disabled/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Wallet Address"
                             name="receiverAddress"
                         // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
