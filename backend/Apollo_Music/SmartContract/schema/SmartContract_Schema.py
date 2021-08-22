@@ -32,7 +32,7 @@ class Query(graphene.ObjectType):
         # get the smart contract with the id
         sc_obj = SmartContract.objects.get(id=id)
         if not sc_obj:
-            print("NO")
+            #print("NO")
             return None
         return SmartContract.objects.get(id=id)
 
