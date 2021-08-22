@@ -3,10 +3,11 @@
     position: fixed;
     height: 100%;
     width: 260px;
-    z-index: 1; /* Stay on top of everything */
-    top: 70px; /* Stay on the top */
+    top: 0px; /* Stay on the top */
     background: #292929 0% 0% no-repeat padding-box;
     overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 70px;
+
 }
 
 .sideButton {

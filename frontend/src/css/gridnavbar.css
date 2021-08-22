@@ -6,6 +6,9 @@
     display: grid;
     grid-template-columns: 1fr 0fr 1fr 6fr;
     grid-column-gap: 5px;
+    z-index: 1; /* Stay on top of everything */
+    position: fixed;
+    top: 0px;
 }
 
 .gridnavbarLogo {

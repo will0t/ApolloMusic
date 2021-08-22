@@ -1,44 +1,88 @@
 import React from 'react';
+import axios from 'axios';
 import { Form, Input, Button, DatePicker, Upload, InputNumber, Progress } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import 'antd/dist/antd.css';
-
+import Content from '../components/content.js';
 //customized css
 import '../css/contractDetail.css'
 
 
 class DetailSC extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            smartContract: null
+        }
+    }
+
+    componentDidMount() {
+        axios.post("http://127.0.0.1:8000/graphql/", {
+            "query": `query getSmartContractWithID {
+                getSmartContractWithid (id: "${this.props.match.params.id}") {
+                    id
+                    creatorName
+                    creatorEmail
+                    receiverEmail
+                    eventName
+                    payAmount
+                    startTime
+                    duration
+                    location
+                    payoutTime
+                    receiverWalletAddress
+                    receiverName
+                    status
+                }
+            } 
+            `,
+            "variables": null,
+            "operationName":"getSmartContractWithID"
+        })
+        .then(response => {
+            console.log(response)
+            this.setState({
+                smartContract: response.data.data.getSmartContractWithid
+            })
+        })
+        .catch(error => {console.log(error)})
+    }
+
+
+
     render() {
+        if (this.state.smartContract === null) {
+            return <div>Loading</div>
+        }
 
-        const { Dragger } = Upload;
-
-        const onFinish = (values) => {
-            console.log('Success:', values);
-
-            //date format
-            const startTime = moment(values.startDate).format('YYYY-MM-DD')
-            console.log(startTime)
-            values.startDate = startTime
-
-            const payoutTime = moment(values.payoutTime).format('YYYY-MM-DD')
-            console.log(payoutTime)
-            values.payoutTime = payoutTime
-
-            this.props.history.push('/confirm', { values })
-        };
-
-        const onFinishFailed = (errorInfo) => {
-            console.log('Failed:', errorInfo);
-        };
+        // Progress Bar
+        var progressCondition = "Draft"
+        var progressPercent = 0
+        var progressColor = "#FEC163"
+        if (this.state.smartContract.status === "A_1") {
+            progressCondition = "Accepted"
+            progressPercent = 50
+        } else if (this.state.smartContract.status === "A_2") {
+            progressCondition = "Cancelled"
+            progressPercent = 0
+        } else if (this.state.smartContract.status === "A_3") {
+            progressCondition = "Paid"
+            progressPercent = 100
+            progressColor = '#5EE2A0'
+        }
+        const progressBar = 
+        <div className="condition">
+            <div className="progress-title">
+                {progressCondition}
+            </div>
+            <Progress strokeColor={'#FEC163'} percent={progressPercent} showInfo={false} />
+        </div>
 
         return (
+            <Content heading="Contract Details">
             <div className="createSC_div">
-
-                <div className="create-title">
-                    Contract detail
-                </div>
 
                 <Form
                     name="basic"
@@ -49,23 +93,13 @@ class DetailSC extends React.Component {
                         span: 14,
                     }}
                     layout="vertical"
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
 
                 >
 
                     <div className='half_div left-half-border'>
-
-                        <div className="condition">
-                            <div className="progress-title">
-                                Pending
-                            </div>
-                            <Progress strokeColor={'#faad14b8'} percent={50} showInfo={false} />
-                            <div style={{color:'#fbf5f5cb'}}>
-                            2021/8/12
-                            </div>
-                        </div>
+                    <div className="condition">
+                    {progressBar}
+                    </div>
 
                         <br/>
 
@@ -74,25 +108,25 @@ class DetailSC extends React.Component {
                             name="title"
                         //rules={[{ required: true, message: 'please input the title' }]}
                         >
-                            <Input placeholder="EDC" disabled />
+                            <Input placeholder={this.state.smartContract.eventName} disabled />
                         </Form.Item>
 
 
 
                         <Form.Item label="Start date" name="startDate">
-                            <DatePicker placeholder="2021-08-10" disabled />
+                            <DatePicker placeholder={this.state.smartContract.startTime.substring(0, 10)} disabled />
 
                         </Form.Item>
                         <Form.Item label="Payout Time" name="payoutTime">
-                            <DatePicker placeholder="2021-08-13" disabled />
+                            <DatePicker placeholder={this.state.smartContract.payoutTime.substring(0, 10)} disabled />
                         </Form.Item>
 
                         <Form.Item
                             label="Duration"
-                            name="Duration"
+                            name="duration"
 
                         >
-                            <Input disabled />
+                            <Input placeholder={`${this.state.smartContract.duration} minutes`} disabled />
                         </Form.Item>
 
                         <Form.Item
@@ -110,25 +144,27 @@ class DetailSC extends React.Component {
                         <Form.Item
                             label="Fee (in ETH)"
                             name="fee"
-                            rules={[{ required: true, message: 'please input the fee' }]}
                         >
-                            <InputNumber prefix="$" placeholder="10" disabled />
+                            <InputNumber placeholder={this.state.smartContract.payAmount} disabled />
                         </Form.Item>
                         <Form.Item
                             label="Location"
                             name="location"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
                         >
-                            <Input placeholder="Las Vegas Motor Speedway, Las Vegas" disabled />
+                            <Input placeholder={this.state.smartContract.location} disabled />
                         </Form.Item>
                         <Form.Item
                             label="Receiver Address"
                             name="receiverAddress"
-                            rules={[{ required: true, message: 'please input Receiver Address' }]}
                         >
-                            <Input placeholder="0xe038b5adebca2cC0Eab655a78E8a87C306854951" disabled />
+                            <Input placeholder={this.state.smartContract.receiverWalletAddress} disabled />
                         </Form.Item>
-
+                        <Form.Item
+                            label="Receiver Name"
+                            name="receiverName"
+                        >
+                            <Input placeholder={this.state.smartContract.receiverName} disabled />
+                        </Form.Item>
                         <Form.Item
                             label="Attachments"
                             name="attachments"
@@ -143,6 +179,8 @@ class DetailSC extends React.Component {
                 </Form>
 
             </div >
+                
+            </Content>
         )
     }
 }

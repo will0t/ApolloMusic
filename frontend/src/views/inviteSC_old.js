@@ -100,7 +100,7 @@ const InviteSC = () => {
             <DatePicker placeholder="2021-08-13" disabled />
           </Form.Item>
 
-          <Form.Item label="Duration" name="Duration">
+          <Form.Item label="duration" name="duration">
             <div style={{ color: "white" }}>{testSC.duration} minutes</div>
           </Form.Item>
 

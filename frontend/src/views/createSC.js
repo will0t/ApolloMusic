@@ -20,13 +20,8 @@ class CreateSC extends React.Component {
             console.log('Success:', values);
 
             //date format
-            const startTime = moment(values.startDate).format('YYYY-MM-DD')
-            console.log(startTime)
-            values.startDate = startTime
-
-            const payoutTime = moment(values.payoutTime).format('YYYY-MM-DD')
-            console.log(payoutTime)
-            values.payoutTime = payoutTime
+            values.startDate = moment(values.startDate).format('YYYY-MM-DD')
+            values.payoutTime = moment(values.payoutTime).format('YYYY-MM-DD HH:MM:SS')
 
             this.props.history.push('/confirm', { values })
         };
@@ -74,8 +69,8 @@ class CreateSC extends React.Component {
 
                         <Form.Item
                             label="Duration"
-                            name="Duration"
-                        // rules={[{ required: true, message: 'Duration' }]}
+                            name="duration"
+                        // rules={[{ required: true, message: 'duration' }]}
                         >
                             <Input suffix="minutes" />
                         </Form.Item>

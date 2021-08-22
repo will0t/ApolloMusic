@@ -1,7 +1,8 @@
 import React from "react";
+import axios from "axios";
 import { withAuth0 } from "@auth0/auth0-react";
 import "../css/create_sc.css";
-import moment from 'moment';
+import Content from "../components/content.js"
 import {
   Form,
   Input,
@@ -12,25 +13,6 @@ import "antd/dist/antd.css";
 import Web3 from 'web3';
 import Apollo from '../contracts/ApolloAgreement.json';
 
-let testSC = {
-    id: "1234",
-    sender: {
-      name: "DJ Psyder",
-      email: "djpsyder@gmail.com",
-      wallet: "102dk2oJf",
-    },
-    recipient: "bennguyen96@gmail.com",
-    title: "Beyond the Valley 2021",
-    ethAmount: 3.2,
-    startTime: "2021-08-19",
-    duration: 60,
-    location: {
-      city: "Melbourne",
-      country: "AUS",
-    },
-    payoutTime: "2021-15-19",
-};
-
 class InviteSC extends React.Component {
 
     constructor(props) {
@@ -38,9 +20,42 @@ class InviteSC extends React.Component {
         this.state = {
             web3: 'undefined',
             apollo: null,
-            account: ''
+            account: '',
+            smartContract: null
         }
-        this.createAgreement = this.createAgreement.bind(this);
+        this.createAgreementAndUpdateSC = this.createAgreementAndUpdateSC.bind(this);
+    }
+    
+    componentDidMount() {
+        axios.post("http://127.0.0.1:8000/graphql/", {
+            "query": `query getSmartContractWithID {
+                getSmartContractWithid (id: "${this.props.match.params.id}") {
+                    id
+                    creatorName
+                    creatorEmail
+                    receiverEmail
+                    eventName
+                    payAmount
+                    startTime
+                    duration
+                    location
+                    payoutTime
+                    receiverWalletAddress
+                    receiverName
+                    status
+                }
+            } 
+            `,
+            "variables": null,
+            "operationName":"getSmartContractWithID"
+        })
+        .then(response => {
+            console.log(response)
+            this.setState({
+                smartContract: response.data.data.getSmartContractWithid
+            })
+        })
+        .catch(error => {console.log(error)})
     }
 
     async componentWillMount() {
@@ -79,10 +94,51 @@ class InviteSC extends React.Component {
         }     
     }
 
-    async createAgreement(payoutTime, destination, amount) {
+    async createAgreementAndUpdateSC(payoutTime, destination, amount) {
         if (this.state.apollo !== 'undefined') {
             try {
                 await this.state.apollo.methods.createAgreement(payoutTime, [destination]).send({from: this.state.account, value: amount})
+                .then(response => {
+                    console.log(response)
+                    // Update status of smart contract
+                    axios.post("http://127.0.0.1:8000/graphql/", {
+                        "query": `mutation updateSmartContract {
+                        updateSmartContract(
+                            id: \"${this.state.smartContract.id}\",
+                            eventName: \"${this.state.smartContract.eventName}\", 
+                            creatorName: \"${this.state.smartContract.creatorName}\", 
+                            creatorEmail: \"${this.state.smartContract.creatorEmail}\", 
+                            receiverEmail: \"${this.state.smartContract.receiverEmail}\",
+                            startTime: \"${this.state.smartContract.startTime}\",
+                            payoutTime: \"${this.state.smartContract.payoutTime}\",
+                            duration: ${this.state.smartContract.duration}, 
+                            payAmount: \"${this.state.smartContract.payAmount}\", 
+                            location: \"${this.state.smartContract.location}\", 
+                            receiverWalletAddress: \"${this.state.smartContract.receiverWalletAddress}\",
+                            receiverName: \"${this.state.smartContract.receiverName}\",
+                            status: 1
+                        ) {
+                            smartContract {
+                                id
+                            }
+                            ok
+                        }}
+                        
+                        `,
+                        "variables": null,
+                        "operationName":"updateSmartContract"
+                    })
+                    .then(response => {
+                        console.log(response.data.data.updateSmartContract.smartContract.id)
+                        this.props.history.push({
+                            pathname: '/deployed',
+                            state: {
+                                contractId: response.data.data.updateSmartContract.smartContract.id
+                            }
+                        });
+                    })
+                    .catch(error => {console.log(error)})
+                })
             } catch (e) {
                 console.log('Error, createAgreement: ', e)
             }
@@ -90,12 +146,11 @@ class InviteSC extends React.Component {
     }
 
     render() {
-        if (this.props.match.params.id !== testSC.id) {
-            return <div>Error 404 Not Found</div>;
+        if (this.state.smartContract === null) {
+            return <div>Loading</div>
         }
-        
-        const authContext = this.props.auth0;
-        console.log(authContext)
+        // const authContext = this.props.auth0;
+        // console.log(authContext)
         //   if (authContext.user === undefined || authContext.user.email !== testSC.recipient) {
         //       return <div>Error 401 Unauthorised</div>;
         //   }
@@ -103,17 +158,18 @@ class InviteSC extends React.Component {
         const dateFormat = 'YYYY/MM/DD';
         //form dunction
         const onFinish = (values) => {
-            console.log('Success:', values);
+            console.log('Success:', this.state.smartContract);
 
             // deploy agreement onto smart contract
-            let amount = values.fee;
-            let payoutTime = new Date(moment(values.payoutTime, dateFormat)).getTime() / 1000
-            let destination = values.receiverAddress;
+            let amount = this.state.smartContract.payAmount;
+            // let payoutTime = new Date(moment(values.payoutTime, dateFormat)).getTime() / 1000
+            let payoutTime = 12312313;
+            let destination = "0x28a3a20E26F39FfcfdA140bAe20023Bc04a7b35f";
             // convert ETH to gwei
             amount = amount * 10**18
-            this.createAgreement(payoutTime, destination, amount)
 
-            this.props.history.push('/success')
+            // Deploy to blockchain and Update SC on backend
+            this.createAgreementAndUpdateSC(payoutTime, destination, amount)
 
         };
 
@@ -122,9 +178,8 @@ class InviteSC extends React.Component {
         console.log('Failed:', errorInfo);
         };
         return (
+          <Content heading="Invitation Details">
             <div className="createSC_div">
-              <div className="create-title">Invitation Details</div>
-        
               <Form
                 name="basic"
                 labelCol={{
@@ -140,18 +195,18 @@ class InviteSC extends React.Component {
               >
                 <div className="half_div left-half-border">
                   <Form.Item label="Title" name="title">
-                    <div style={{ color: "white" }}>{testSC.title}</div>
+                    <div style={{ color: "white" }}>{this.state.smartContract.eventName}</div>
                   </Form.Item>
         
                   <Form.Item label="Start date" name="startDate">
-                    <DatePicker placeholder="2021-08-10" disabled />
+                    <DatePicker placeholder={this.state.smartContract.startTime.substring(0, 10)} disabled />
                   </Form.Item>
                   <Form.Item label="Payout Time" name="payoutTime">
-                    <DatePicker placeholder="2021-08-13" disabled />
+                    <DatePicker placeholder={this.state.smartContract.payoutTime.substring(0, 10)} disabled />
                   </Form.Item>
         
-                  <Form.Item label="Duration" name="Duration">
-                    <div style={{ color: "white" }}>{testSC.duration} minutes</div>
+                  <Form.Item label="Duration" name="duration">
+                    <div style={{ color: "white" }}>{this.state.smartContract.duration} minutes</div>
                   </Form.Item>
         
                   <Form.Item label="Terms & Conditions" name="term">
@@ -162,17 +217,17 @@ class InviteSC extends React.Component {
                 </div>
                 <div className="half_div right-half-border">
                   <Form.Item label="Fee (in ETH)" name="fee">
-                    <div style={{ color: "white" }}>{testSC.ethAmount}</div>
+                    <div style={{ color: "white" }}>{this.state.smartContract.payAmount}</div>
                   </Form.Item>
                   <Form.Item label="Location" name="location">
-                    <div style={{ color: "white" }}>{testSC.location.city}, {testSC.location.country}</div>
+                    <div style={{ color: "white" }}>{this.state.smartContract.location}</div>
                   </Form.Item>
                   <Form.Item
                     label="Receiver Address"
                     name="receiverAddress"
                   >
                     <Input
-                      placeholder="0xe038b5adebca2cC0Eab655a78E8a87C306854951"
+                      placeholder={this.state.smartContract.receiverWalletAddress}
                       disabled
                     />
                   </Form.Item>
@@ -182,12 +237,23 @@ class InviteSC extends React.Component {
                       <a style={{ color: "white" }}>ticket.pdf</a>
                     </div>
                   </Form.Item>
+                  <Form.Item style={{'text-align':'center'}}>
+                    <Button type="danger" size='large' htmlType="submit" style={{'background':'#b2b6b6','border-color': '#b2b6b6'}}>
+                        Decline
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;                    
+                    <Button type="secondary" size='large' htmlType="submit">
+                        Edit
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;     
+                    <Button type="primary" size='large' htmlType="submit">
+                        Confirm
+                    </Button>
+                </Form.Item>
                 </div>
               </Form>
-              <Button type="danger">Decline</Button>
-              <Button type="secondary">Edit</Button>
-              <Button type="primary">Accept</Button>
             </div>
+          </Content>
         )
     }
 

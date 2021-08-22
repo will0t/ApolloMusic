@@ -15,12 +15,15 @@ import DetailSC from './views/detailSC.js';
 import ShareSC from './views/shareSC.js';
 import InviteSC from './views/inviteSC.js';
 import Contracts from './views/contracts.js';
+import DeployedSC from './views/deployedSC.js';
+
 
 // CSS
 import "./css/general.css";
 
 class App extends React.Component {
   render() {
+
     return (
       <Router>
         <GridNavBar/>
@@ -31,10 +34,11 @@ class App extends React.Component {
             <Route path = "/metamask" exact component = {Metamask}/>
             <Route path = "/create" exact component = {CreateSC}/>
             <Route path = "/confirm" exact component = {ConfirmSC}/>
-            <Route path = "/contractDetail" exact component = {DetailSC}/>
+            <Route path = "/detail/:id" exact component = {DetailSC}/>
             <Route path = "/success" exact component = {ShareSC}/>
             <Route path = "/invite/:id" component = {InviteSC}/>
             <Route path = "/contracts" exact component = {Contracts}/>
+            <Route path = "/deployed" exact component = {DeployedSC}/>
           </Switch>
         </div>
       </Router>
@@ -42,25 +46,5 @@ class App extends React.Component {
   }
 }
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Apollo Music x Ethereum
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

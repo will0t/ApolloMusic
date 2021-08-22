@@ -1,11 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 import { Form, Input, Button, DatePicker, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import Web3 from 'web3';
-import Apollo from '../contracts/ApolloAgreement.json';
-
 import apollo from '../Preloader.gif';
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    useQuery,
+    gql,
+    useMutation
+} from "@apollo/client";
+import { withAuth0 } from "@auth0/auth0-react";
 
 //customized css
 import '../css/confirm_sc.css'
@@ -18,12 +25,7 @@ class ConfirmSC extends React.Component {
         }
     }
 
-    async componentWillMount() {
-    }
-
-
     render() {
-
         //data from create contract
         let data = this.props.location.state.values;
         console.log(data)
@@ -62,19 +64,60 @@ class ConfirmSC extends React.Component {
             console.log('Success:', values);
 
             // deploy agreement onto smart contract
-            let amount = values.fee;
-            let payoutTime = new Date(moment(values.payoutTime, dateFormat)).getTime() / 1000
-            let destination = values.receiverAddress;
+            // let amount = values.fee;
+            //let payoutTime = new Date(moment(values.payoutTime, dateFormat)).getTime() / 1000
             // convert ETH to gwei
-            amount = amount * 10**18
-            console.log(amount)
-            console.log(payoutTime)
-            console.log(destination)
+            // amount = amount * 10**18
+            let DTstartDate = new Date(values.startDate).toISOString()
+            let DTpayoutTime = new Date(values.payoutTime).toISOString()
             //this.createAgreement(payoutTime, destination, amount)
-            this.props.history.push({
-                pathname: '/success',
-                state: { name: values.receiverFName }
-            });
+            var sender_name = "NOT_LOGGED_IN"
+            if (this.props.auth0.user !== undefined) {
+                sender_name = this.props.auth0.user.nickname
+            }
+            var sender_email = "not_logged_in@gmail.com"
+            if (this.props.auth0.user !== undefined) {
+                sender_email = this.props.auth0.user.email
+            }
+
+            axios.post("http://127.0.0.1:8000/graphql/", {
+                "query": `mutation createSmartContract {
+                createSmartContract(
+                    eventName: \"${values.title}\", 
+                    creatorName: \"${sender_name}\", 
+                    creatorEmail: \"${sender_email}\", 
+                    receiverEmail: \"${values.receiverEmail}\",
+                    startTime: \"${DTstartDate}\",
+                    payoutTime: \"${DTpayoutTime}\",
+                    duration: ${values.duration}, 
+                    payAmount: \"${values.fee}\", 
+                    location: \"${values.location}\", 
+                    receiverWalletAddress: \"${values.receiverAddress}\",
+                    receiverName: \"${values.receiverFName}\"
+                ) {
+                    smartContract {
+                        id
+                    }
+                    ok
+                }}
+                
+                `,
+                "variables": null,
+                "operationName":"createSmartContract"
+            })
+            .then(response => {
+                console.log(response)
+                this.props.history.push({
+                    pathname: '/success',
+                    state: {
+                        name: values.receiverFName,
+                        contractId: response.data.data.createSmartContract.smartContract.id
+                    }
+                });
+            })
+            .catch(error => {console.log(error)})
+
+
 
         };
 
@@ -103,7 +146,7 @@ class ConfirmSC extends React.Component {
                         span: 14,
                     }}
                     layout="vertical"
-                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
+                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), duration: data.duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
 
@@ -131,7 +174,7 @@ class ConfirmSC extends React.Component {
                         {/* form-duration 3*/}
                         <Form.Item
                             label="Duration"
-                            name="Duration"
+                            name="duration"
                         >
                             <Input suffix="minutes" disabled />
                         </Form.Item>
@@ -226,4 +269,4 @@ class ConfirmSC extends React.Component {
     }
 }
 
-export default ConfirmSC;
+export default withAuth0(ConfirmSC);

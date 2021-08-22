@@ -157,23 +157,30 @@ class Metamask extends React.Component {
         }
 
         // CHANGE: only shows the first address for now
-        var agreements = ""
-        if (this.state.result) {
-            console.log(this.state.result)
-            agreements = (
-                this.state.result.map((agreement, key) => (
-                    <div className = "content-wrapper">
-                        Agreement Number: {key+1}
-                        <br/>
-                        Amount: {agreement.payoutAmount}
-                        <br/>
-                        Payout Time: {agreement.payoutTime}
-                        <br/>
-                        Payout Destination: {agreement.payoutDestination[0]}
-                    </div>
-                ))
-            )
-        }
+        // var agreements = ""
+        // if (this.state.result) {
+        //     console.log(this.state.result)
+        //     agreements = (
+        //         this.state.result.map((agreement, key) => (
+        //             <div className = "content-wrapper">
+        //                 Agreement Number: {key+1}
+        //                 <br/>
+        //                 Amount: {agreement.payoutAmount}
+        //                 <br/>
+        //                 Payout Time: {agreement.payoutTime}
+        //                 <br/>
+        //                 Payout Destination: {agreement.payoutDestination[0]}
+        //             </div>
+        //         ))
+        //     )
+        // }
+        // <div>
+        //     <h1> Agreements </h1>
+        //     <Button onClick = {this.getAgreementsByPromoter}>
+        //         Retrieve Agreements    
+        //     </Button>
+        //     {agreements}
+        // </div>
 
         // Text to show in body
         var text = <span>
@@ -196,15 +203,6 @@ class Metamask extends React.Component {
         return (
             <Content heading="Metamask Integration">
                 {text}
-
-                <div>
-                    <h1> Agreements </h1>
-                    <Button onClick = {this.getAgreementsByPromoter}>
-                        Retrieve Agreements    
-                    </Button>
-                    {agreements}
-
-                </div>
             </Content>
         )
 
