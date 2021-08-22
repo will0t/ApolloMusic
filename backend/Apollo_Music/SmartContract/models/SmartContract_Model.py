@@ -14,23 +14,24 @@ class SmartContract(models.Model):
         
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    eventName = models.CharField(max_length=60, unique=True, null=False)
+    eventName = models.CharField(max_length=60, null=False)
     startTime = models.DateTimeField(null=False)
     duration = models.IntegerField(null=False)
     payoutTime = models.DateTimeField(null=False)
     updateTime = models.DateTimeField(auto_now=True)
     createTime = models.DateTimeField(auto_now=True)
-
+    
     #address = models.CharField(max_length=200, null=False)
     #city = models.CharField(max_length=20, null=False)
     #country = models.CharField(max_length=20, null=False)
-    
+    location = models.CharField(max_length=200, null=False)
     payAmount = models.DecimalField(max_digits=20, decimal_places=5, null=False)
     receiverWalletAddress = models.CharField(max_length=200, null=False)
 
     #generatedCode = models.CharField(max_length=100)
     
     #receiver = models.ManyToManyField(to="User.User")
+    receiverName = models.CharField(max_length=200, null=False)
     receiverEmail = models.EmailField(max_length=200, null=False)
     #creator = models.ForeignKey(to="User.User", related_name='creator', on_delete=models.SET_NULL, null=True)
     creatorName = models.CharField(max_length=200, null=False)
