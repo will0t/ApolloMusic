@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import "../css/create_sc.css";
+import moment from 'moment';
 import {
   Form,
   Input,
@@ -10,7 +11,7 @@ import {
 } from "antd";
 import "antd/dist/antd.css";
 
-const InvitationSC = () => {
+const InviteSC = () => {
   let testSC = {
     id: "1234",
     sender: {
@@ -40,6 +41,36 @@ const InvitationSC = () => {
 //       return <div>Error 401 Unauthorised</div>;
 //   }
 
+		const dateFormat = 'YYYY/MM/DD';
+    //form dunction
+    const onFinish = (values) => {
+      console.log('Success:', values);
+
+      // deploy agreement onto smart contract
+      let amount = values.fee;
+      // CHANGE this using epoch'ed value of values.payoutTime
+      // Need to add payoutTime
+      let testpayoutTime = new Date(moment(values.payoffTime, dateFormat)).getTime() / 1000
+      console.log(testpayoutTime)
+      let payoutTime = 1231233;
+      // CHANGE this using added destination field
+      let destination = values.receiverAddress;
+      // convert ETH to gwei
+      amount = amount * 10**18
+      console.log(amount)
+      console.log(payoutTime)
+      console.log(destination)
+      this.createAgreement(payoutTime, destination, amount)
+
+      this.props.history.push('/success')
+
+  };
+
+  //form function
+  const onFinishFailed = (errorInfo) => {
+      console.log('Failed:', errorInfo);
+  };
+
   return (
     <div className="createSC_div">
       <div className="create-title">Invitation Details</div>
@@ -54,6 +85,8 @@ const InvitationSC = () => {
         }}
         layout="vertical"
         initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
         <div className="half_div left-half-border">
           <Form.Item label="Title" name="title">
@@ -67,7 +100,7 @@ const InvitationSC = () => {
             <DatePicker placeholder="2021-08-13" disabled />
           </Form.Item>
 
-          <Form.Item label="Duration" name="Duration">
+          <Form.Item label="duration" name="duration">
             <div style={{ color: "white" }}>{testSC.duration} minutes</div>
           </Form.Item>
 
@@ -108,4 +141,4 @@ const InvitationSC = () => {
   );
 };
 
-export default InvitationSC;
+export default InviteSC;

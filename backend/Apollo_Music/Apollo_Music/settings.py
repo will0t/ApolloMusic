@@ -24,6 +24,8 @@ SECRET_KEY = 'django-insecure-(6zm1_!fu_l^hjkb4-mgtqn9%1(y6e-a%=z+wd((e0w071+c9e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CORS_ALLOW_ALL_ORIGINS = True
+APPEND_SLASH=False
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,10 +42,12 @@ INSTALLED_APPS = [
     'User.apps.UserConfig',
     'SmartContract.apps.SmartContractConfig',
     'graphene_django',
+    'corsheaders'
 ]
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

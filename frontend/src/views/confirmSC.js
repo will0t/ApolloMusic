@@ -1,11 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 import { Form, Input, Button, DatePicker, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import Web3 from 'web3';
-import Apollo from '../contracts/ApolloAgreement.json';
-
 import apollo from '../Preloader.gif';
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    useQuery,
+    gql,
+    useMutation
+} from "@apollo/client";
+import { withAuth0 } from "@auth0/auth0-react";
 
 //customized css
 import '../css/confirm_sc.css'
@@ -15,62 +22,10 @@ class ConfirmSC extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            web3: 'undefined',
-            apollo: null,
-            account: ''
-        }
-        //this.createAgreement = this.createAgreement.bind(this);
-    }
-
-    async componentWillMount() {
-        await this.loadBlockchainData()
-    }
-
-    async loadBlockchainData() {
-        if (typeof window.ethereum !== 'undefined') {
-            const web3 = new Web3(window.ethereum)
-            const netId = await web3.eth.net.getId()
-            const accounts = await web3.eth.getAccounts()
-
-            // Load Balance
-            if (typeof accounts[0] !== 'undefined') {
-                this.setState({
-                    account: accounts[0],
-                    web3: web3
-                })
-            } else {
-                window.alert('Please login and connect your Metamask account')
-            }
-
-            // Load Contracts
-            try {
-                const apollo = new web3.eth.Contract(Apollo.abi, Apollo.networks[netId].address)
-                this.setState({
-                    apollo: apollo
-                })
-            } catch (e) {
-                console.log('Error', e)
-                window.alert('Contracts are not deployed to the current network')
-            }
-
-        } else {
-            window.alert('Metamask has not been installed. Please install Metamask.')
         }
     }
-    /*
-    async createAgreement(payoutTime, destination, amount) {
-        if (this.state.apollo !== 'undefined') {
-            try {
-                await this.state.apollo.methods.createAgreement(payoutTime, [destination]).send({from: this.state.account, value: amount})
-            } catch (e) {
-                console.log('Error, createAgreement: ', e)
-            }
-        }
-    }
-    */
 
     render() {
-
         //data from create contract
         let data = this.props.location.state.values;
         console.log(data)
@@ -109,24 +64,60 @@ class ConfirmSC extends React.Component {
             console.log('Success:', values);
 
             // deploy agreement onto smart contract
-            let amount = values.fee;
-            // CHANGE this using epoch'ed value of values.payoutTime
-            // Need to add payoutTime
-            let testpayoutTime = new Date(moment(values.payoffTime, dateFormat)).getTime() / 1000
-            console.log(testpayoutTime)
-            let payoutTime = 1231233;
-            // CHANGE this using added destination field
-            let destination = values.receiverAddress;
+            // let amount = values.fee;
+            //let payoutTime = new Date(moment(values.payoutTime, dateFormat)).getTime() / 1000
             // convert ETH to gwei
-            amount = amount * 10**18
-            console.log(amount)
-            console.log(payoutTime)
-            console.log(destination)
+            // amount = amount * 10**18
+            let DTstartDate = new Date(values.startDate).toISOString()
+            let DTpayoutTime = new Date(values.payoutTime).toISOString()
             //this.createAgreement(payoutTime, destination, amount)
-            this.props.history.push({
-                pathname: '/success',
-                state: { name: values.receiverFName }
-            });
+            var sender_name = "NOT_LOGGED_IN"
+            if (this.props.auth0.user !== undefined) {
+                sender_name = this.props.auth0.user.nickname
+            }
+            var sender_email = "not_logged_in@gmail.com"
+            if (this.props.auth0.user !== undefined) {
+                sender_email = this.props.auth0.user.email
+            }
+
+            axios.post("http://127.0.0.1:8000/graphql/", {
+                "query": `mutation createSmartContract {
+                createSmartContract(
+                    eventName: \"${values.title}\", 
+                    creatorName: \"${sender_name}\", 
+                    creatorEmail: \"${sender_email}\", 
+                    receiverEmail: \"${values.receiverEmail}\",
+                    startTime: \"${DTstartDate}\",
+                    payoutTime: \"${DTpayoutTime}\",
+                    duration: ${values.duration}, 
+                    payAmount: \"${values.fee}\", 
+                    location: \"${values.location}\", 
+                    receiverWalletAddress: \"${values.receiverAddress}\",
+                    receiverName: \"${values.receiverFName}\"
+                ) {
+                    smartContract {
+                        id
+                    }
+                    ok
+                }}
+                
+                `,
+                "variables": null,
+                "operationName":"createSmartContract"
+            })
+            .then(response => {
+                console.log(response)
+                this.props.history.push({
+                    pathname: '/success',
+                    state: {
+                        name: values.receiverFName,
+                        contractId: response.data.data.createSmartContract.smartContract.id
+                    }
+                });
+            })
+            .catch(error => {console.log(error)})
+
+
 
         };
 
@@ -155,7 +146,7 @@ class ConfirmSC extends React.Component {
                         span: 14,
                     }}
                     layout="vertical"
-                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), Duration: data.Duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
+                    initialValues={{ title: data.title, startDate: moment(data.startDate, dateFormat), duration: data.duration, fee: data.fee, location: data.location, payoutTime: moment(data.payoutTime, dateFormat), receiverAddress: data.receiverAddress, receiverFName: data.receiverFName, receiverEmail: data.receiverEmail }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
 
@@ -183,7 +174,7 @@ class ConfirmSC extends React.Component {
                         {/* form-duration 3*/}
                         <Form.Item
                             label="Duration"
-                            name="Duration"
+                            name="duration"
                         >
                             <Input suffix="minutes" disabled />
                         </Form.Item>
@@ -278,4 +269,4 @@ class ConfirmSC extends React.Component {
     }
 }
 
-export default ConfirmSC;
+export default withAuth0(ConfirmSC);

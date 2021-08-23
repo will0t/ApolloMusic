@@ -10,7 +10,7 @@ import {
 class Sharelink extends React.Component {
     render() {
         // Variable Declaration
-        var shareUrl = "https://github.com/levimk/ApolloMusic"
+        var shareUrl = `http://localhost:3000/invite/${this.props.contractId}`
 
         var title = `Hey ${this.props.receiver}, ${this.props.sender} has shared a Smart Contract with you`
         var body = "You can find the link to the smart contract below."
@@ -18,8 +18,10 @@ class Sharelink extends React.Component {
         return (
             <div className = "sharelink-wrapper">
               <h2>Share the link to the Smart Contract </h2>
+              <div>The recipient must accept the invitation for the Smart Contract to be succesfully deployed on the blockchain network</div>
 
               <div className="social-wrapper">
+                Share via Whatsapp:&nbsp;
                 <WhatsappShareButton
                   url={shareUrl}
                   title={title}
@@ -31,6 +33,7 @@ class Sharelink extends React.Component {
               </div>
 
               <div className="social-wrapper">
+                Share via Email:&nbsp;
                 <EmailShareButton
                   url={shareUrl}
                   subject={title}
@@ -40,6 +43,10 @@ class Sharelink extends React.Component {
                   <EmailIcon size={32} round />
                 </EmailShareButton>
               </div>
+              <div>
+                Share Link: {shareUrl}
+              </div>
+              
 
             </div>
         )
