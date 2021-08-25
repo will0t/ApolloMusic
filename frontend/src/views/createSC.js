@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Input, Button, DatePicker, Upload, InputNumber } from 'antd';
+import { Form, Input, Button, DatePicker, Upload, InputNumber} from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import Content from '../components/content.js'
 
 import 'antd/dist/antd.css';
 
@@ -19,13 +20,8 @@ class CreateSC extends React.Component {
             console.log('Success:', values);
 
             //date format
-            const startTime = moment(values.startDate).format('YYYY-MM-DD')
-            console.log(startTime)
-            values.startDate = startTime
-
-            const payoutTime = moment(values.payoutTime).format('YYYY-MM-DD')
-            console.log(payoutTime)
-            values.payoutTime = payoutTime
+            values.startDate = moment(values.startDate).format('YYYY-MM-DD')
+            values.payoutTime = moment(values.payoutTime).format('YYYY-MM-DD HH:MM:SS')
 
             this.props.history.push('/confirm', { values })
         };
@@ -35,14 +31,8 @@ class CreateSC extends React.Component {
         };
 
         return (
-            <div className="createSC_div">
-
-                <div className="create-title">
-                    Create Contract
-                </div>
-
-
-
+            <Content heading="Create Contract">
+            <div className="creatSC_div"> 
                 <Form
                     name="basic"
                     labelCol={{
@@ -57,11 +47,11 @@ class CreateSC extends React.Component {
                     onFinishFailed={onFinishFailed}
 
                 >
-                    <div className='half_div left-half-border'>
+                    <div className='half_div'>
                         <Form.Item
-                            label="Title"
+                            label="Event Name"
                             name="title"
-                        //rules={[{ required: true, message: 'please input the title' }]}
+                            rules={[{ required: true, message: 'Please insert event name' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -73,16 +63,16 @@ class CreateSC extends React.Component {
 
                         </Form.Item>
                         <Form.Item label="Payout Time" name="payoutTime">
-                            <DatePicker showTime />
+                            <DatePicker showTime/>
 
                         </Form.Item>
 
                         <Form.Item
                             label="Duration"
-                            name="Duration"
-                       
+                            name="duration"
+                        // rules={[{ required: true, message: 'duration' }]}
                         >
-                            <Input />
+                            <Input suffix="minutes" />
                         </Form.Item>
 
                         <Form.Item
@@ -101,25 +91,39 @@ class CreateSC extends React.Component {
 
 
                     </div>
-                    <div className='half_div right-half-border'>
+                    <div className='half_div'>
                         <Form.Item
                             label="Fee (in ETH)"
                             name="fee"
-                            rules={[{ required: true, message: 'please input the fee' }]}
+                            rules={[{ required: true, message: 'Please insert fee of the contract in ETH' }]}
                         >
                             <InputNumber prefix="$" />
                         </Form.Item>
                         <Form.Item
                             label="Location"
                             name="location"
-                        // rules={[{ required: true, message: 'Title of Booking' }]}
+                            rules={[{ required: true, message: 'Please insert location of event' }]}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            label="Receiver Address"
+                            label="Receiver First Name"
+                            name="receiverFName"
+                            rules={[{ required: true, message: 'Please insert First Name of Receiver' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Email"
+                            name="receiverEmail"
+                            rules={[{ required: true, type: "email", message: 'Please insert a valid email' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Receiver Wallet Address"
                             name="receiverAddress"
-                            rules={[{ required: true, message: 'please input Receiver Address' }]}
+                            rules={[{ required: true, message: 'Please insert receiver\'s wallet address' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -140,29 +144,16 @@ class CreateSC extends React.Component {
                         </Form.Item>
 
                         <Form.Item>
-                            <div>
-                                <div className="button-div">
-                                    <Form.Item>
-                                        <Button type="primary" size='large' htmlType="submit">
-                                            Submit
-                                        </Button>
-                                    </Form.Item>
-                                </div>
-
-                                <div>
-                                    <Form.Item>
-                                        <Button type="primary" size='large' ghost>
-                                            Cancel
-                                        </Button>
-                                    </Form.Item>
-                                </div>
-                            </div>
+                            <Button type="primary" size='large' htmlType="submit">
+                                Submit
+                            </Button>
                         </Form.Item>
 
                     </div>
                 </Form>
 
             </div >
+            </Content>
         )
     }
 }

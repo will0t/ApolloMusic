@@ -1,0 +1,140 @@
+.tab-list {  border-bottom: 1px solid #ccc;
+    padding-left: 0;
+  }
+  
+.tab-list-item {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+}
+  
+.tab-list-active {
+    background-color: #FFFFFF3E;
+}
+
+.declineButton {
+    right: -250px;
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    background-color: #EB5757;
+    border-color: #EB5757;
+}
+
+.declineButton {
+    right: -250px;
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    background-color: #EB5757;
+    border-color: #EB5757;
+}
+
+.declineButton:enabled {
+    right: -250px;
+    width: 33px;
+    height: 33px;
+    position: relative;
+    background-color: #eb3e3e;
+    border-color: #eb3e3e;
+}
+
+.acceptButton {
+    right: -275px;
+    width: 33px;
+    height: 33px;
+    position: relative;
+    background-color: #68fab4;
+    border-color: #68fab4;
+}
+
+.acceptButton:hover {
+    right: -275px;
+    width: 33px;
+    height: 33px;
+    position: relative;
+    background-color: #22fd93;
+    border-color: #22fd93;
+    
+}
+
+.acceptButton:enabled {
+    right: -275px;
+    width: 33px;
+    height: 33px;
+    position: relative;
+    background-color: #68fab4;
+    border-color: #68fab4;
+    
+}
+
+.react-scrollable-list {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 600px;
+    width: 1100px;
+    padding-left: 25px;
+    padding-top: 10px;
+    overflow-y: scroll;
+  }
+  
+.react-scrollable-list-item {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100px;
+    padding-left: 10px;
+    background-color: #292929;
+    border-bottom: rgb(0, 0, 0) solid 1px;
+    color: #ffffff;
+}
+
+.event-header {
+    font-size: 20px;
+    padding-top: 5px;
+  }
+  
+.box {
+    display: flex;
+    padding-top: 6px;
+  }
+  
+  .date-header {
+    font-size: 14px;
+    width: 150px;
+    
+  }
+
+  .date-text {
+    color: rgb(255, 255, 255);
+    width: 150px;
+    
+  }
+
+  .fee-header {
+    width: 150px;
+  }
+  
+  .fee-text {
+    width: 150px;
+  }
+
+  .duration-header {
+    width: 150px;
+  }
+  
+  .duration-text {
+    width: 150px;
+  }
+
+  .where-header {
+    width: 200px;
+  }
+  
+  .where-text {
+    width: 200px;
+  }
+
+
