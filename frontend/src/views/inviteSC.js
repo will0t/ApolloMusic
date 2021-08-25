@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { withAuth0 } from "@auth0/auth0-react";
-import "../css/create_sc.css";
+import "../css/contractDetail.module.css";
 import Content from "../components/content.js"
 import {
   Form,

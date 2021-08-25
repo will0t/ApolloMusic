@@ -15,7 +15,7 @@ import {
 import { withAuth0 } from "@auth0/auth0-react";
 
 //customized css
-import '../css/confirm_sc.css'
+import confirm_sc from '../css/confirm_sc.module.css'
 
 class ConfirmSC extends React.Component {
 
@@ -128,9 +128,9 @@ class ConfirmSC extends React.Component {
 
 
         return (
-            <div className="outer-div">
+            <div className={confirm_sc.outer_div}>
 
-                <div className="title-div">
+                <div className={confirm_sc.title_div}>
                     apollo <img src={apollo} style={{ 'width': '50px', 'height': '50px' }} alt="logo" height="32" />
                 </div>
                 <h1> Confirm Smart Contract Details
@@ -151,7 +151,7 @@ class ConfirmSC extends React.Component {
                     onFinishFailed={onFinishFailed}
 
                 >
-                    <div className='half_div'>
+                    <div className={confirm_sc.half_div}>
 
                         {/*form- title 1*/}
                         <Form.Item
@@ -196,7 +196,7 @@ class ConfirmSC extends React.Component {
 
 
                     </div>
-                    <div className='half_div'>
+                    <div className={confirm_sc.half_div}>
 
                         {/* form-fee 5*/}
                         <Form.Item

@@ -1,0 +1,21 @@
+
+/* content div */
+.create_content{
+    height:750px;
+}
+
+
+/* form: half div */
+.create_half_form{
+    width:50%;
+    height: 750px;
+    float:left;
+    padding-left: 30px;
+    padding-top: 30px;
+    background: var(--dialouge-background) 0% 0% no-repeat padding-box;
+    background: #1D1D1D 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+
+
