@@ -7,7 +7,7 @@ import Content from '../components/content.js'
 import 'antd/dist/antd.css';
 
 //customized css
-import '../css/create_sc.css'
+import create_sc from '../css/create_sc.module.css'
 
 
 class CreateSC extends React.Component {
@@ -32,7 +32,7 @@ class CreateSC extends React.Component {
 
         return (
             <Content heading="Create Contract">
-            <div className="creatSC_div"> 
+            <div className={create_sc.create_content}> 
                 <Form
                     name="basic"
                     labelCol={{
@@ -47,7 +47,7 @@ class CreateSC extends React.Component {
                     onFinishFailed={onFinishFailed}
 
                 >
-                    <div className='half_div'>
+                    <div className={create_sc.create_half_form}>
                         <Form.Item
                             label="Event Name"
                             name="title"
@@ -91,7 +91,7 @@ class CreateSC extends React.Component {
 
 
                     </div>
-                    <div className='half_div'>
+                    <div className={create_sc.create_half_form}>
                         <Form.Item
                             label="Fee (in ETH)"
                             name="fee"

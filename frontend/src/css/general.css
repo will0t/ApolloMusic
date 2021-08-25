@@ -30,3 +30,196 @@ h2{
 .declined {
 	color: #FF4141;
 }
+
+
+
+/* form*/
+/* form -label*/
+.ant-form-item-label > label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    color: #3B86FF;
+    font-size: 14px;
+}
+/* form - input*/
+.ant-input {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5715;
+    background: var(--dialouge-background) 0% 0% no-repeat padding-box;
+    background: #292929 0% 0% no-repeat padding-box;
+    opacity: 1;
+    background-image: none;
+    border: 0;
+    border-bottom: 1px solid #3B86FF;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/*form - input warning */
+.ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper, .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+    background-color: #292929;
+    border-color: #ff4d4f;
+}
+
+/* input - affix*/
+.ant-input-affix-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: #3B86FF;
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #292929;
+    background-image: none;
+	border: 0;
+    border-bottom: 1px solid #3B86FF;
+    border-radius: 2px;
+    transition: all 0.3s;
+    display: inline-flex;
+}
+
+/* form - picker */
+.ant-picker {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    padding: 4px 11px 4px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: #292929;
+	border: 0;
+    border-bottom: 1px solid #3B86FF;
+    border-radius: 2px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+.ant-picker-input > input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #292929;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all 0.3s;
+    flex: auto;
+    min-width: 1px;
+    height: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+/* form - upload */
+.ant-upload.ant-upload-drag {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: 1px dashed #525151;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+/* form - upload */
+.ant-form-item .ant-upload {
+    background: #292929;
+}
+/* form - upload*/
+.ant-upload.ant-upload-drag p.ant-upload-text {
+    margin: 0 0 4px;
+    color: #b7babc;
+    font-size: 16px;
+}
+.ant-form-item .ant-upload.ant-upload-drag {
+    background:#525151;
+}
+
+/*form -input number*/
+.ant-input-number {
+    box-sizing: border-box;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: white; 
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #292929; 
+    background-image: none;
+    transition: all 0.3s;
+    display: inline-block;
+    width: 90px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+}
+
+/*form - number input*/
+.ant-input-number-input {
+    width: 100%;
+    height: 30px;
+    padding: 0 11px;
+    text-align: left;
+    background-color: #292929;
+	border: 0;
+    border-bottom: 1px solid #3B86FF;
+    border-radius: 2px;
+    outline: 0;
+    transition: all 0.3s linear;
+    -moz-appearance: textfield !important;
+}
+
+/* disable form*/
+.ant-input[disabled] {
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #292929;
+	border: 0;
+    border-bottom: 1px solid #3B86FF;
+	color:white;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 1;
+}
+.ant-picker.ant-picker-disabled {
+    background: #292929;
+	border: 0;
+    border-bottom: 1px solid #3B86FF;
+	color:white;
+    cursor: not-allowed;
+}
+.ant-picker-input > input[disabled] {
+    background: #292929;
+    color: white;
+}

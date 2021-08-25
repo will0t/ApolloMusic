@@ -6,7 +6,7 @@ import moment from 'moment';
 import 'antd/dist/antd.css';
 import Content from '../components/content.js';
 //customized css
-import '../css/contractDetail.css'
+import '../css/contractDetail.module.css'
 
 
 class DetailSC extends React.Component {
