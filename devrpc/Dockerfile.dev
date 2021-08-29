@@ -9,5 +9,5 @@ CMD [\
   "-h", "0.0.0.0", \
   "--deterministic", "--db=/ganache_data", \
   "--deterministic", \
-  "--mnemonic", "tonight surface whale legend urban unaware void undo oak clean crane amount" \
+  "--mnemonic", "grant luggage banana roast girl cross weird tornado affair genius tourist swamp" \
   ]
