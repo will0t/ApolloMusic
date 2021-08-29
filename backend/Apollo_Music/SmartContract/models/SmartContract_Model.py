@@ -14,7 +14,7 @@ class SmartContract(models.Model):
         
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    eventName = models.CharField(max_length=60, null=False)
+    eventName = models.CharField(max_length=60,unique=True, null=False)
     startTime = models.DateTimeField(null=False)
     duration = models.IntegerField(null=False)
     payoutTime = models.DateTimeField(null=False)

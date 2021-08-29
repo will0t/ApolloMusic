@@ -77,13 +77,13 @@ class CreateSmartContract(graphene.Mutation):
         kwargs['version'] = 1
         for attr, value in kwargs.items():
             setattr(sc_obj, attr, value)
-        # sc_obj.save()
-        # ok = True
-        try:
-            sc_obj.save()
-            ok = True
-        except:
-            ok = False
+        sc_obj.save()
+        ok = True
+        # try:
+        #     sc_obj.save()
+        #     ok = True
+        # except:
+        #     ok = False
         return CreateSmartContract(ok=ok, smart_contract=sc_obj)
 
 
